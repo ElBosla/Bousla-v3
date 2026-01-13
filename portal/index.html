@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دخول الطلاب - بوصلة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1"
+        rel="stylesheet">
+    <link rel="icon" href="../assets/images/logo.jpg" type="image/jpeg" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        if (localStorage.getItem('color-theme') === 'dark') {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#13b6ec',
+                        secondary: '#263238'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Almarai', sans-serif;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 dark:bg-[#0f171a] min-h-screen flex items-center justify-center p-4">
+    <div class="max-w-md w-full glass p-6 md:p-8 rounded-[2.5rem] shadow-2xl relative overflow-hidden">
+        <div class="absolute -top-10 -right-10 size-32 bg-primary/10 rounded-full blur-3xl"></div>
+
+        <div class="relative z-10 text-center">
+            <img src="../assets/images/logo.jpg" alt="لوجو بوصلة"
+                class="size-20 rounded-2xl object-cover shadow-xl mx-auto mb-6" />
+            <h1 class="text-2xl font-black text-secondary dark:text-white mb-2">منصة بوصلة</h1>
+            <p class="text-gray-400 font-bold mb-8 text-xs">أهلاً بك في رحلتك التعليمية</p>
+
+            <div class="flex p-1 bg-gray-100 dark:bg-gray-800 rounded-2xl mb-8">
+                <button onclick="setRole('student')" id="studentTab"
+                    class="flex-1 py-3 rounded-xl text-xs font-black transition-all bg-white dark:bg-gray-700 text-primary shadow-sm">دخول
+                    الطلاب</button>
+                <button onclick="setRole('admin')" id="adminTab"
+                    class="flex-1 py-3 rounded-xl text-xs font-black transition-all text-gray-400">دخول الإدارة</button>
+            </div>
+
+            <form id="loginForm" class="space-y-4">
+                <div class="relative group">
+                    <span id="userInputIcon"
+                        class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary transition-colors">phone</span>
+                    <input type="text" id="userInput" required placeholder="رقم الهاتف المسجل"
+                        class="w-full h-14 pr-12 bg-gray-50 dark:bg-[#151e22] border-gray-100 rounded-2xl focus:ring-2 focus:ring-primary outline-none font-bold text-center transition-all">
+                </div>
+                <div class="relative group">
+                    <span
+                        class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary transition-colors">lock</span>
+                    <input type="password" id="userPass" required placeholder="كلمة المرور"
+                        class="w-full h-14 pr-12 bg-gray-50 dark:bg-[#151e22] border-gray-100 rounded-2xl focus:ring-2 focus:ring-primary outline-none font-bold text-center transition-all">
+                </div>
+
+                <p id="errorMsg" class="text-red-500 text-xs font-bold hidden">❌ خطأ في البيانات أو الحساب غير نشط</p>
+
+                <button type="submit" id="loginBtn"
+                    class="w-full h-14 bg-primary text-white font-black rounded-2xl shadow-xl shadow-primary/25 transition-all transform hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-2">
+                    <span>دخول للحساب</span>
+                    <span class="material-symbols-outlined">login</span>
+                </button>
+            </form>
+
+            <a href="../index.html"
+                class="mt-6 inline-block text-xs font-bold text-gray-400 hover:text-primary transition-colors">العودة
+                للرئيسية</a>
+        </div>
+    </div>
+
+    <!-- Appwrite SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/appwrite@16.1.0"></script>
+    <script src="../assets/js/appwrite.js"></script>
+    <script>
+        // const { databases, DATABASE_ID, COLLECTIONS, Query } = window.appwrite;
+
+        let currentRole = 'student';
+
+        function setRole(role) {
+            currentRole = role;
+            const sTab = document.getElementById('studentTab');
+            const aTab = document.getElementById('adminTab');
+            const input = document.getElementById('userInput');
+            const icon = document.getElementById('userInputIcon');
+
+            if (role === 'student') {
+                sTab.className = "flex-1 py-3 rounded-xl text-xs font-black transition-all bg-white dark:bg-gray-700 text-primary shadow-sm";
+                aTab.className = "flex-1 py-3 rounded-xl text-xs font-black transition-all text-gray-400";
+                input.placeholder = "رقم الهاتف المسجل";
+                icon.textContent = "phone";
+            } else {
+                aTab.className = "flex-1 py-3 rounded-xl text-xs font-black transition-all bg-white dark:bg-gray-700 text-primary shadow-sm";
+                sTab.className = "flex-1 py-3 rounded-xl text-xs font-black transition-all text-gray-400";
+                input.placeholder = "اسم المستخدم";
+                icon.textContent = "person";
+            }
+        }
+
+        document.getElementById('loginForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const user = document.getElementById('userInput').value.trim();
+            const pass = document.getElementById('userPass').value.trim();
+            const loginBtn = document.getElementById('loginBtn');
+            const errorMsg = document.getElementById('errorMsg');
+
+            loginBtn.disabled = true;
+            loginBtn.innerHTML = 'جاري التحقق...';
+            errorMsg.classList.add('hidden');
+
+            try {
+                if (currentRole === 'student') {
+                    const snap = await databases.listDocuments(
+                        DATABASE_ID,
+                        COLLECTIONS.APPLICANTS,
+                        [
+                            Query.equal("phone", user),
+                            Query.equal("password", pass)
+                        ]
+                    );
+
+                    if (snap.total > 0) {
+                        const studentData = snap.documents[0];
+                        if (studentData.status !== 'نشط') {
+                            errorMsg.textContent = '❌ الحساب غير نشط حالياً، تواصل مع الإدارة';
+                            errorMsg.classList.remove('hidden');
+                        } else {
+                            sessionStorage.setItem('student_auth', 'true');
+                            sessionStorage.setItem('student_id', studentData.$id);
+                            sessionStorage.setItem('student_name', studentData.name);
+                            window.location.href = 'dashboard.html';
+                            return;
+                        }
+                    } else {
+                        errorMsg.textContent = '❌ رقم الهاتف أو كلمة المرور غير صحيحة';
+                        errorMsg.classList.remove('hidden');
+                    }
+                } else {
+                    // Admin Login
+                    const userDoc = await databases.listDocuments(
+                        DATABASE_ID,
+                        COLLECTIONS.ADMINS,
+                        [
+                            Query.equal("username", user),
+                            Query.equal("password", pass)
+                        ]
+                    );
+
+                    if (snap.total > 0) {
+                        const userData = userDoc.documents[0];
+                        sessionStorage.setItem('admin_auth', 'true');
+                        sessionStorage.setItem('user_role', userData.role || 'manager');
+                        window.location.href = '../admin/dashboard.html';
+                        return;
+                    }
+
+                    // Failsafe for admin/admin (Only if no admins exist)
+                    if (user === 'admin' && pass === 'admin') {
+                        const adminCheck = await databases.listDocuments(
+                            DATABASE_ID,
+                            COLLECTIONS.ADMINS,
+                            [Query.equal("role", "admin"), Query.limit(1)]
+                        );
+                        if (adminCheck.total === 0) {
+                            sessionStorage.setItem('admin_auth', 'true');
+                            sessionStorage.setItem('user_role', 'admin');
+                            window.location.href = '../admin/dashboard.html';
+                            return;
+                        }
+                    }
+
+                    errorMsg.textContent = '❌ اسم المستخدم أو كلمة المرور غير صحيحة';
+                    errorMsg.classList.remove('hidden');
+                }
+            } catch (err) {
+                alert('خطأ في الاتصال: ' + err.message);
+            } finally {
+                loginBtn.disabled = false;
+                loginBtn.innerHTML = '<span>دخول للحساب</span><span class="material-symbols-outlined">login</span>';
+            }
+        };
+    </script>
+</body>
+
+</html>

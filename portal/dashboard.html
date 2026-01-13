@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة الطلاب - بوصلة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1"
+        rel="stylesheet">
+    <link rel="icon" href="../assets/images/logo.jpg" type="image/jpeg" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        if (localStorage.getItem('color-theme') === 'dark') {
+            document.documentElement.classList.add('dark');
+        }
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#13b6ec',
+                        secondary: '#263238'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Almarai', sans-serif;
+            visibility: hidden;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 dark:bg-[#0f171a] min-h-screen">
+    <div class="max-w-4xl mx-auto px-2 md:px-4 py-4 md:py-8">
+        <!-- Header -->
+        <header
+            class="flex items-center justify-between mb-6 md:mb-10 bg-white dark:bg-[#1a2428] p-4 md:p-6 rounded-3xl md:rounded-[2.5rem] shadow-sm border border-gray-100 dark:border-gray-800">
+            <div class="flex items-center gap-4">
+                <img src="../assets/images/logo.jpg" alt="لوجو" class="size-14 rounded-2xl object-cover" />
+                <div>
+                    <h1 class="text-xl font-black text-secondary dark:text-white" id="welcomeName">مرحباً بك</h1>
+                    <p class="text-[10px] font-bold text-primary tracking-widest uppercase">بوابة الطالب التعليمية</p>
+                </div>
+            </div>
+            <button onclick="logout()"
+                class="size-12 bg-red-50 text-red-500 rounded-2xl flex items-center justify-center hover:bg-red-500 hover:text-white transition-all">
+                <span class="material-symbols-outlined">logout</span>
+            </button>
+        </header>
+
+        <div class="flex flex-col md:grid md:grid-cols-3 gap-4 md:gap-6">
+            <!-- Sidebar: Progress and Info -->
+            <div class="md:col-span-1 space-y-4 md:space-y-6 order-2 md:order-1">
+                <!-- Progress Card -->
+                <div
+                    class="bg-white dark:bg-[#1a2428] p-4 md:p-6 rounded-3xl md:rounded-[2.5rem] shadow-sm border border-gray-100 dark:border-gray-800">
+                    <h3 class="text-sm font-black text-secondary dark:text-white mb-4 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary">analytics</span>
+                        تقدمك الحالي
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-[10px] font-black mb-1">
+                                <span class="text-gray-400">إنجاز المسار</span>
+                                <span class="text-primary" id="progressVal">0%</span>
+                            </div>
+                            <div class="w-full h-2 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
+                                <div id="progressBar" class="h-full bg-primary transition-all duration-1000"
+                                    style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="pt-4 border-t border-gray-50 dark:border-gray-800 space-y-2">
+                            <p class="text-[10px] font-bold text-gray-400">المسار: <span
+                                    class="text-secondary dark:text-white" id="pathName">--</span></p>
+                            <p class="text-[10px] font-bold text-gray-400">الأسبوع: <span
+                                    class="text-secondary dark:text-white" id="weekNum">--</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Support Card -->
+                <div
+                    class="bg-gradient-to-br from-primary to-[#0e8cb5] p-5 md:p-6 rounded-3xl md:rounded-[2.5rem] text-white shadow-lg shadow-primary/20">
+                    <h3 class="font-black text-base mb-2">هل تحتاج مساعدة؟</h3>
+                    <p class="text-xs opacity-90 leading-relaxed mb-4">يمكنك مراسلة فريق بوصلة مباشرة من هنا وسنقوم
+                        بالرد عليك في أقرب وقت.</p>
+                    <span class="material-symbols-outlined text-4xl opacity-30">support_agent</span>
+                </div>
+            </div>
+
+            <!-- Main: Chat Interface -->
+            <div
+                class="md:col-span-2 bg-white dark:bg-[#1a2428] rounded-3xl md:rounded-[2.5rem] shadow-sm border border-gray-100 dark:border-gray-800 flex flex-col h-[550px] md:h-[600px] overflow-hidden order-1 md:order-2">
+                <div class="p-4 md:p-6 border-b border-gray-50 dark:border-gray-800 flex items-center gap-4">
+                    <div class="size-10 bg-primary/10 text-primary rounded-xl flex items-center justify-center">
+                        <span class="material-symbols-outlined">chat</span>
+                    </div>
+                    <div>
+                        <h3 class="font-black text-secondary dark:text-white leading-none">تواصل مع المنتروز</h3>
+                        <p class="text-[10px] font-bold text-green-500 mt-1">نشط الآن</p>
+                    </div>
+                </div>
+
+                <div id="chatMessages"
+                    class="flex-1 overflow-y-auto p-4 md:p-6 space-y-4 bg-gray-50/50 dark:bg-black/10">
+                    <!-- Messages will appear here -->
+                </div>
+
+                <div class="p-4 bg-white dark:bg-[#1a2428] border-t border-gray-50 dark:border-gray-800">
+                    <form id="chatForm" class="flex items-center gap-1 md:gap-2">
+                        <button type="button" id="voiceBtn"
+                            class="size-11 md:size-14 bg-gray-50 dark:bg-gray-800 text-gray-400 rounded-xl md:rounded-2xl flex items-center justify-center hover:text-primary transition-all">
+                            <span class="material-symbols-outlined text-xl">mic</span>
+                        </button>
+                        <button type="button" onclick="document.getElementById('fileInput').click()"
+                            class="size-11 md:size-14 bg-gray-50 dark:bg-gray-800 text-gray-400 rounded-xl md:rounded-2xl flex items-center justify-center hover:text-primary transition-all">
+                            <span class="material-symbols-outlined text-xl">attach_file</span>
+                        </button>
+                        <input type="file" id="fileInput" class="hidden" multiple
+                            onchange="handleFileUpload(this.files)">
+                        <input type="text" id="chatInput" placeholder="اكتب سؤالك هنا..."
+                            class="flex-1 h-11 md:h-14 bg-gray-50 dark:bg-gray-800 border-none rounded-xl md:rounded-2xl px-3 md:px-6 font-bold text-xs md:text-sm text-secondary dark:text-white focus:ring-2 focus:ring-primary shadow-sm"
+                            required>
+                        <button type="submit"
+                            class="size-11 md:size-14 bg-primary text-white rounded-xl md:rounded-2xl flex items-center justify-center shadow-lg shadow-primary/20 hover:scale-105 transition-all">
+                            <span class="material-symbols-outlined text-xl">send</span>
+                        </button>
+                    </form>
+                    <div id="recordingStatus"
+                        class="hidden items-center justify-between bg-primary/10 p-4 rounded-2xl mt-2 animate-pulse text-primary">
+                        <div class="flex items-center gap-3">
+                            <span class="size-3 bg-red-500 rounded-full"></span>
+                            <span class="text-xs font-black">جاري تسجيل صوتك... <span
+                                    id="recordTimer">00:00</span></span>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="cancelRecording()"
+                                class="text-red-500 font-bold text-xs px-2">إلغاء</button>
+                            <button onclick="stopAndSendRecording()"
+                                class="bg-primary text-white px-4 py-2 rounded-xl text-xs font-black">إرسال</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Appwrite SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/appwrite@16.1.0"></script>
+    <script src="../assets/js/appwrite.js"></script>
+    <script>
+        // const { client, databases, storage, DATABASE_ID, COLLECTIONS, ID } = window.appwrite;
+
+        // Auth Check
+        const studentId = sessionStorage.getItem('student_id');
+        if (!studentId || sessionStorage.getItem('student_auth') !== 'true') {
+            window.location.href = 'index.html';
+        } else {
+            document.body.style.visibility = 'visible';
+            document.getElementById('welcomeName').textContent = 'مرحباً، ' + sessionStorage.getItem('student_name');
+        }
+
+        function logout() {
+            sessionStorage.clear();
+            window.location.href = 'index.html';
+        }
+
+        // Load Student Info (Progress etc) in Real-time
+        async function listenToStudentStats() {
+            // Initial load
+            try {
+                const doc = await databases.getDocument(DATABASE_ID, COLLECTIONS.APPLICANTS, studentId);
+                updateUIWithStudentData(doc);
+            } catch (e) { console.error(e); }
+
+            // Realtime subscription
+            client.subscribe(`databases.${DATABASE_ID}.collections.${COLLECTIONS.APPLICANTS}.documents.${studentId}`, response => {
+                updateUIWithStudentData(response.payload);
+            });
+        }
+
+        function updateUIWithStudentData(data) {
+            // If account becomes inactive while logged in, kick out
+            if (data.status !== 'نشط') {
+                alert('تم إنهاء الجلسة أو الحساب غير نشط حالياً');
+                logout();
+                return;
+            }
+
+            document.getElementById('pathName').textContent = data.specialization || '--';
+            const current = data.currentWeek || 0;
+            const total = data.totalWeeks || 12;
+            document.getElementById('weekNum').textContent = `${current} من أصل ${total}`;
+
+            const percent = Math.min(100, Math.round((current / total) * 100));
+            document.getElementById('progressVal').textContent = percent + '%';
+            document.getElementById('progressBar').style.width = percent + '%';
+
+            // Check for Training Program Status
+            if (data.email) {
+                checkTraineeStatus(data.email);
+            }
+        }
+        listenToStudentStats();
+
+        // Chat Logic
+        const chatMessages = document.getElementById('chatMessages');
+
+        async function loadInitialMessages() {
+            try {
+                const response = await databases.listDocuments(
+                    DATABASE_ID,
+                    COLLECTIONS.MESSAGES,
+                    [
+                        Appwrite.Query.equal('senderId', studentId),
+                        Appwrite.Query.orderAsc('timestamp')
+                    ]
+                );
+                renderMessages(response.documents);
+            } catch (e) { console.error(e); }
+        }
+
+        function renderMessages(docs) {
+            if (docs.length === 0) {
+                chatMessages.innerHTML = `
+                    <div class="h-full flex flex-col items-center justify-center text-center opacity-20">
+                        <span class="material-symbols-outlined text-4xl">waving_hand</span>
+                        <p class="font-black mt-2 text-xs">أهلاً بك! ابدأ محادثتك معنا هنا</p>
+                    </div>`;
+                return;
+            }
+
+            chatMessages.innerHTML = docs.map(m => {
+                const isStudent = m.senderType === 'student';
+
+                let content = `<p class="text-sm font-bold">${m.text || ''}</p>`;
+                if (m.type === 'audio') {
+                    content = `<audio src="${m.audioUrl}" controls class="h-8 max-w-full"></audio>`;
+                } else if (m.type === 'meeting') {
+                    content = `
+                        <div class="bg-blue-600/10 dark:bg-blue-600/20 p-4 rounded-2xl border border-blue-600/20 text-center">
+                            <div class="flex items-center justify-center gap-2 mb-2">
+                                <img src="https://www.gstatic.com/images/branding/product/2x/meet_48dp.png" class="size-5" alt="Google Meet">
+                                <p class="text-[10px] font-black text-blue-600 dark:text-blue-400">اجتماع Google Meet</p>
+                            </div>
+                            <a href="${m.meetingUrl}" target="_blank" class="bg-blue-600 text-white px-5 py-2 rounded-xl text-[10px] font-black inline-block shadow-lg shadow-blue-600/20 transition-all hover:scale-105">انضم الآن</a>
+                        </div>`;
+                } else if (m.type === 'file') {
+                    const isImage = m.fileType && m.fileType.startsWith('image/');
+                    if (isImage) {
+                        content = `<a href="${m.fileUrl}" target="_blank"><img src="${m.fileUrl}" class="rounded-xl max-w-full max-h-60 object-cover shadow-sm" alt="image"></a>`;
+                    } else {
+                        content = `
+                            <a href="${m.fileUrl}" target="_blank" class="flex items-center gap-2 p-2 bg-gray-100 dark:bg-gray-700 rounded-xl hover:bg-gray-200 dark:hover:bg-gray-600 transition-all">
+                                <span class="material-symbols-outlined text-primary">description</span>
+                                <div class="text-right overflow-hidden">
+                                    <p class="text-[10px] font-black truncate max-w-[150px]">${m.fileName || 'ملف مرفق'}</p>
+                                    <p class="text-[8px] opacity-60">تحميل الملف</p>
+                                </div>
+                            </a>`;
+                    }
+                }
+
+                return `
+                    <div class="flex ${isStudent ? 'justify-start' : 'justify-end'}">
+                        <div class="max-w-[85%] p-4 rounded-2xl shadow-sm border ${isStudent
+                        ? 'bg-primary text-white border-primary rounded-tr-none'
+                        : 'bg-white dark:bg-gray-800 text-secondary dark:text-white border-gray-100 dark:border-gray-700 rounded-tl-none'}">
+                            ${content}
+                            <p class="text-[8px] mt-1 opacity-60 text-left" dir="ltr">${m.timestamp ? new Date(m.timestamp).toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' }) : ''}</p>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        loadInitialMessages();
+
+        // Realtime Messages
+        client.subscribe(`databases.${DATABASE_ID}.collections.${COLLECTIONS.MESSAGES}.documents`, response => {
+            if (response.events.includes('databases.*.collections.*.documents.*.create')) {
+                const newMessage = response.payload;
+                if (newMessage.senderId === studentId) {
+                    loadInitialMessages(); // Reload for simplicity, or append
+                }
+            }
+        });
+
+        // --- Voice Recording Logic ---
+        let mediaRecorder;
+        let audioChunks = [];
+        let recordInterval;
+
+        document.getElementById('voiceBtn').onclick = async () => {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                mediaRecorder = new MediaRecorder(stream);
+                audioChunks = [];
+
+                mediaRecorder.ondataavailable = (event) => audioChunks.push(event.data);
+                mediaRecorder.onstop = uploadVoice;
+
+                mediaRecorder.start();
+                showRecordingUI();
+            } catch (err) {
+                alert("يرجى السماح بالوصول للميكروفون");
+            }
+        };
+
+        function showRecordingUI() {
+            document.getElementById('chatForm').classList.add('hidden');
+            document.getElementById('recordingStatus').classList.remove('hidden');
+            let sec = 0;
+            recordInterval = setInterval(() => {
+                sec++;
+                let m = Math.floor(sec / 60).toString().padStart(2, '0');
+                let s = (sec % 60).toString().padStart(2, '0');
+                document.getElementById('recordTimer').textContent = `${m}:${s}`;
+            }, 1000);
+        }
+
+        function cancelRecording() {
+            mediaRecorder.stop();
+            mediaRecorder.onstop = null;
+            hideRecordingUI();
+        }
+
+        function stopAndSendRecording() {
+            mediaRecorder.stop();
+            hideRecordingUI();
+        }
+
+        function hideRecordingUI() {
+            document.getElementById('chatForm').classList.remove('hidden');
+            document.getElementById('recordingStatus').classList.add('hidden');
+            clearInterval(recordInterval);
+            document.getElementById('recordTimer').textContent = "00:00";
+        }
+
+        async function uploadVoice() {
+            const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+            const fileId = ID.unique();
+
+            try {
+                const uploadedFile = await storage.createFile('chats', fileId, audioBlob);
+                const url = storage.getFileDownload('chats', uploadedFile.$id);
+                sendMsg({ type: 'audio', audioUrl: url });
+            } catch (err) {
+                console.error("Upload failed", err);
+            }
+        }
+
+        async function handleFileUpload(files) {
+            if (!files || files.length === 0) return;
+
+            for (let file of files) {
+                const fileId = ID.unique();
+
+                // Create Progress Bar UI
+                const chatMessages = document.getElementById('chatMessages');
+                const progressId = `progress_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
+                const progressHtml = `
+                    <div id="${progressId}" class="flex justify-end mb-4">
+                        <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-2xl border border-gray-100 dark:border-gray-700 w-64">
+                            <p class="text-[10px] font-bold text-gray-400 mb-2">جاري رفع: ${file.name}</p>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5 overflow-hidden">
+                                <div id="${progressId}_bar" class="bg-primary h-full transition-all" style="width: 0%"></div>
+                            </div>
+                            <p id="${progressId}_text" class="text-[8px] font-black text-primary mt-1">جاري الرفع...</p>
+                        </div>
+                    </div>
+                `;
+                chatMessages.insertAdjacentHTML('beforeend', progressHtml);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                try {
+                    const uploadedFile = await storage.createFile('chats', fileId, file);
+                    const url = storage.getFileDownload('chats', uploadedFile.$id);
+
+                    const el = document.getElementById(progressId);
+                    if (el) el.remove();
+
+                    await sendMsg({
+                        type: 'file',
+                        fileUrl: url,
+                        fileName: file.name,
+                        fileType: file.type
+                    });
+                } catch (err) {
+                    console.error("Upload failed", err);
+                    const el = document.getElementById(progressId);
+                    if (el) el.remove();
+                    alert("فشل رفع الملف: " + file.name);
+                }
+            }
+            document.getElementById('fileInput').value = '';
+        }
+
+        async function sendMsg(data) {
+            const msg = {
+                ...data,
+                senderType: 'student',
+                senderId: studentId,
+                timestamp: new Date().toISOString()
+            };
+            await databases.createDocument(DATABASE_ID, COLLECTIONS.MESSAGES, ID.unique(), msg);
+        }
+
+        document.getElementById('chatForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const input = document.getElementById('chatInput');
+            const text = input.value.trim();
+            if (!text) return;
+
+            const msg = {
+                text: text,
+                senderType: 'student',
+                senderId: studentId,
+                timestamp: new Date().toISOString()
+            };
+
+            input.value = '';
+            try {
+                await databases.createDocument(DATABASE_ID, COLLECTIONS.MESSAGES, ID.unique(), msg);
+            } catch (err) {
+                alert('فشل في إرسال الرسالة');
+            }
+        };
+
+        async function checkTraineeStatus(email) {
+            try {
+                const response = await databases.listDocuments(
+                    DATABASE_ID,
+                    COLLECTIONS.TRAINEES,
+                    [Appwrite.Query.equal('email', email)]
+                );
+
+                if (response.documents.length > 0) {
+                    const trainee = response.documents[0];
+                    if (trainee.status === 'Accepted') {
+                        // Inject Training Workspace Card
+                        const sidebar = document.querySelector('.md\\:col-span-1');
+                        if (sidebar) {
+                            const trainingCard = `
+                                <div class="bg-gradient-to-br from-green-500 to-green-700 p-5 md:p-6 rounded-3xl md:rounded-[2.5rem] text-white shadow-lg shadow-green-500/20 order-first cursor-pointer transform hover:scale-105 transition-all mb-6">
+                                    <h3 class="font-black text-base mb-2 flex items-center gap-2">
+                                        <span class="material-symbols-outlined bg-white/20 p-1 rounded-lg">work</span>
+                                        بيئة العمل (Training)
+                                    </h3>
+                                    <p class="text-xs opacity-90 leading-relaxed mb-4">أهلاً بك يا ${trainee.fullName.split(' ')[0]}! لقد تم قبولك في برنامج التدريب.</p>
+                                    <button onclick="window.location.href='training-workspace.html'" class="bg-white text-green-700 w-full py-3 rounded-xl font-black text-sm hover:bg-green-50 transition-colors">
+                                        دخول بيئة العمل
+                                    </button>
+                                </div>
+                            `;
+                            // Insert at the top of the sidebar
+                            sidebar.insertAdjacentHTML('afterbegin', trainingCard);
+                        }
+                    }
+                }
+            } catch (e) {
+                console.error("Error checking trainee status", e);
+            }
+        }
+    </script>
+</body>
+
+</html>

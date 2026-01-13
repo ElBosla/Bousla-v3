@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" dir="rtl" lang="ar">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>بوصلة - طريقك الصح للتعلم</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&amp;family=Manrope:wght@400;500;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link rel="icon" href="assets/images/logo.jpg" type="image/jpeg" />
+    <link rel="apple-touch-icon" href="assets/images/logo.jpg" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13b6ec",
+                        "primary-dark": "#0e8cb5",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#101d22",
+                        "secondary": "#263238",
+                    },
+                    fontFamily: {
+                        "display": ["Almarai", "sans-serif"],
+                        "body": ["Almarai", "sans-serif"],
+                    },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Almarai', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stagger-reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease-out;
+        }
+
+        .stagger-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+    <script>
+        // Check for saved theme preference (Default is Light)
+        if (localStorage.getItem('color-theme') === 'dark') {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        function toggleDarkMode() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        }
+
+        // Animation Observer
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal, .stagger-reveal').forEach(el => observer.observe(el));
+        });
+    </script>
+</head>
+
+<body
+    class="bg-background-light text-secondary antialiased overflow-x-hidden transition-colors duration-300 dark:bg-background-dark dark:text-gray-100">
+    <!-- Navigation -->
+    <nav
+        class="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-md border-b border-gray-100 transition-colors duration-300 dark:bg-background-dark/90 dark:border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <img src="assets/images/logo.jpg" alt="بوصلة"
+                        class="size-10 sm:size-12 rounded-xl object-cover shadow-sm" />
+                    <span
+                        class="hidden sm:inline text-2xl font-extrabold tracking-tight text-secondary dark:text-white">بوصلة</span>
+                </div>
+                <div class="hidden md:flex items-center gap-8">
+                    <a class="text-sm font-bold text-gray-600 hover:text-primary transition-colors dark:text-gray-400 dark:hover:text-primary"
+                        href="#problems">ليه بوصلة؟</a>
+                    <a class="text-sm font-bold text-gray-600 hover:text-primary transition-colors dark:text-gray-400 dark:hover:text-primary"
+                        href="#how-it-works">الحل</a>
+                    <a class="text-sm font-bold text-gray-600 hover:text-primary transition-colors dark:text-gray-400 dark:hover:text-primary"
+                        href="#comparison">المقارنة</a>
+                    <a class="text-sm font-bold text-gray-600 hover:text-primary transition-colors dark:text-gray-400 dark:hover:text-primary"
+                        <a
+                        class="text-sm font-bold text-gray-600 hover:text-primary transition-colors dark:text-gray-400 dark:hover:text-primary"
+                        href="#pricing">الباقات</a>
+                    <a class="text-sm font-bold text-primary hover:text-primary-dark transition-colors dark:text-primary dark:hover:text-white"
+                        href="portal/training.html">التدريب العملي 🚀</a>
+                </div>
+                <div class="flex items-center gap-2 sm:gap-4">
+                    <button id="theme-toggle" onclick="toggleDarkMode()"
+                        class="p-2.5 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none rounded-lg text-sm transition-colors">
+                        <span class="material-symbols-outlined dark:hidden">dark_mode</span>
+                        <span class="material-symbols-outlined hidden dark:block">light_mode</span>
+                    </button>
+
+                    <a href="portal/form.html"
+                        class="flex items-center gap-1.5 border border-primary sm:border-2 text-primary hover:bg-primary hover:text-white text-[11px] sm:text-sm font-bold py-2 px-3 sm:py-2 sm:px-5 rounded-lg transition-all transform hover:-translate-y-0.5 group">
+                        <span
+                            class="material-symbols-outlined text-base sm:text-lg group-hover:rotate-12 transition-transform">event_available</span>
+                        حجز استشارة مجانية
+                    </a>
+
+                    <a href="portal/form.html"
+                        class="bg-primary hover:bg-primary-dark text-white text-[11px] sm:text-sm font-bold py-2 px-4 sm:py-2.5 sm:px-6 rounded-lg transition-all shadow-lg shadow-primary/20 transform hover:-translate-y-0.5">
+                        ابدأ رحلتك
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <header
+        class="relative bg-white overflow-hidden pt-16 pb-24 lg:pt-32 lg:pb-40 transition-colors duration-300 dark:bg-background-dark">
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-30 pointer-events-none">
+            <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-primary/10 blur-3xl"></div>
+            <div class="absolute top-1/2 -left-24 w-72 h-72 rounded-full bg-green-100/20 blur-3xl"></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+                <div class="flex flex-col gap-6 text-right">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary w-fit">
+                        <span class="material-symbols-outlined text-sm">school</span>
+                        <span class="text-xs font-bold">تعلم بذكاء مش بجهد</span>
+                    </div>
+                    <h1 class="text-3xl lg:text-6xl font-black leading-tight text-secondary dark:text-white">
+                        <span class="text-primary block mb-2 text-2xl lg:text-5xl">📍 بوصلة…</span>
+                        طريقك الصح للتعلّم من يوتيوب بدون تشتّت
+                    </h1>
+                    <p class="text-lg text-gray-600 dark:text-gray-400 font-medium leading-relaxed max-w-lg">
+                        مش محتاج كورسات غالية.. أنت محتاج مسار واضح + متابعة + حد يجاوبك لما تعطل.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 mt-4">
+                        <a href="portal/form.html"
+                            class="flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white text-base font-bold h-12 px-8 rounded-lg shadow-xl shadow-primary/25 transition-all transform hover:-translate-y-1 w-full sm:w-auto">
+                            <span>ابدأ رحلتك الآن</span>
+                            <span class="material-symbols-outlined text-sm">arrow_back</span>
+                        </a>
+                        <a href="portal/form.html"
+                            class="flex items-center justify-center gap-2 bg-gray-100 dark:bg-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 text-secondary text-base font-bold h-12 px-8 rounded-lg transition-colors w-full sm:w-auto">
+                            <span>اعرف إزاي بوصلة هتساعدك</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="relative lg:h-auto w-full flex justify-center lg:justify-end">
+                    <!-- Abstract representation of a compass/path -->
+                    <div class="relative w-full max-w-md aspect-square bg-gradient-to-tr from-blue-50 to-green-50 rounded-2xl p-8 flex items-center justify-center border border-gray-100 shadow-2xl"
+                        data-alt="Illustration of a compass pointing the way through scattered video icons">
+                        <div class="absolute inset-0 opacity-20"
+                            style="background-image: radial-gradient(#13b6ec 1px, transparent 1px); background-size: 20px 20px;">
+                        </div>
+                        <div
+                            class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg relative z-10 w-full max-w-[300px] text-center border dark:border-gray-700">
+                            <div
+                                class="size-16 bg-primary rounded-full mx-auto -mt-14 mb-4 flex items-center justify-center border-4 border-white dark:border-gray-800 shadow-md text-white">
+                                <span class="material-symbols-outlined text-3xl">navigation</span>
+                            </div>
+                            <h3 class="font-bold text-lg mb-2 dark:text-white">مسارك المخصص</h3>
+                            <div class="space-y-3 text-right">
+                                <div class="flex items-center gap-3 bg-gray-50 dark:bg-gray-700/50 p-2 rounded-lg">
+                                    <span class="material-symbols-outlined text-green-500">check_circle</span>
+                                    <span class="text-xs font-bold text-gray-700 dark:text-gray-300">أساسيات
+                                        البرمجة</span>
+                                </div>
+                                <div
+                                    class="flex items-center gap-3 bg-gray-50 dark:bg-gray-700/50 p-2 rounded-lg opacity-50">
+                                    <span class="material-symbols-outlined text-gray-400">radio_button_unchecked</span>
+                                    <span class="text-xs font-bold text-gray-700 dark:text-gray-300">تطبيقات
+                                        عملية</span>
+                                </div>
+                                <div
+                                    class="flex items-center gap-3 bg-gray-50 dark:bg-gray-700/50 p-2 rounded-lg opacity-50">
+                                    <span class="material-symbols-outlined text-gray-400">lock</span>
+                                    <span class="text-xs font-bold text-gray-700 dark:text-gray-300">مشروع التخرج</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Floating elements -->
+                        <div class="absolute top-10 right-0 bg-white p-2 rounded-lg shadow-lg rotate-12 animate-bounce"
+                            style="animation-duration: 3s;">
+                            <span class="material-symbols-outlined text-red-500 text-3xl">play_circle</span>
+                        </div>
+                        <div class="absolute bottom-10 left-4 bg-white p-2 rounded-lg shadow-lg -rotate-12 animate-bounce"
+                            style="animation-duration: 4s;">
+                            <span class="material-symbols-outlined text-yellow-500 text-3xl">lightbulb</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Pain Points Section -->
+    <section id="problems" class="py-20 bg-gray-50 dark:bg-background-dark transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl lg:text-4xl font-black text-secondary dark:text-white mb-4">ليه أغلب الناس بتفشل في
+                    التعلّم من
+                    يوتيوب؟</h2>
+                <div class="h-1.5 w-24 bg-primary mx-auto rounded-full"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                <!-- Card 1 -->
+                <div
+                    class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:border-red-100 dark:hover:border-red-900/30 hover:shadow-md transition-all group stagger-reveal">
+                    <div
+                        class="size-12 bg-red-50 dark:bg-red-900/20 text-red-500 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined">shuffle</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 dark:text-white">تشتت المحتوى</h3>
+                    <p class="text-gray-500 dark:text-gray-400">فيديوهات كتير جدًا ومفيش أي ترتيب منطقي يخليك تبني
+                        معلومة على معلومة.</p>
+                </div>
+                <!-- Card 2 -->
+                <div
+                    class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:border-red-100 dark:hover:border-red-900/30 hover:shadow-md transition-all group stagger-reveal">
+                    <div
+                        class="size-12 bg-red-50 dark:bg-red-900/20 text-red-500 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined">battery_alert</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 dark:text-white">عدم الاستمرار</h3>
+                    <p class="text-gray-500 dark:text-gray-400">الحماس بيبدأ عالي وبعدين بيختفي لأن مفيش حد بيتابعك ولا
+                        خطة واضحة تمشي
+                        عليها.</p>
+                </div>
+                <!-- Card 3 -->
+                <div
+                    class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:border-red-100 dark:hover:border-red-900/30 hover:shadow-md transition-all group stagger-reveal">
+                    <div
+                        class="size-12 bg-red-50 dark:bg-red-900/20 text-red-500 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined">sentiment_dissatisfied</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 dark:text-white">غياب الدعم</h3>
+                    <p class="text-gray-500 dark:text-gray-400">لما بتقف قدامك مشكلة، مفيش حد تسأله، فبتتعطل وتزهق وتسيب
+                        التعليم كله.</p>
+                </div>
+                <!-- Card 4 -->
+                <div
+                    class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:border-red-100 dark:hover:border-red-900/30 hover:shadow-md transition-all group stagger-reveal">
+                    <div
+                        class="size-12 bg-red-50 dark:bg-red-900/20 text-red-500 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined">history</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 dark:text-white">ضياع الوقت</h3>
+                    <p class="text-gray-500 dark:text-gray-400">بتضيع ساعات في البحث عن "أفضل كورس" بدل ما تذاكر،
+                        والمحصلة صفر.</p>
+                </div>
+                <!-- Card 5 -->
+                <div
+                    class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:border-red-100 dark:hover:border-red-900/30 hover:shadow-md transition-all group md:col-span-2 lg:col-span-2 stagger-reveal">
+                    <div
+                        class="size-12 bg-red-50 dark:bg-red-900/20 text-red-500 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined">question_mark</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 dark:text-white">توهان المستوى</h3>
+                    <p class="text-gray-500 dark:text-gray-400">مش عارف مستواك الحقيقي فين، هل أنت مبتدئ ولا متوسط؟ ولا
+                        هل أنت جاهز للشغل
+                        ولا لسه؟</p>
+                </div>
+            </div>
+            <div class="mt-16 text-center">
+                <blockquote
+                    class="text-2xl lg:text-3xl font-bold text-secondary dark:text-white bg-white dark:bg-gray-800 inline-block px-8 py-6 rounded-2xl shadow-lg border-r-4 border-primary">
+                    ❝ المشكلة مش فيك… المشكلة إنك ماشي من غير بوصلة ❞
+                </blockquote>
+            </div>
+        </div>
+    </section>
+    <!-- Solution Section -->
+    <section class="py-20 bg-white dark:bg-background-dark transition-colors duration-300" id="how-it-works">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+            <div class="flex flex-col md:flex-row gap-12 items-center">
+                <div class="w-full md:w-1/2">
+                    <div class="relative rounded-2xl overflow-hidden aspect-square bg-gray-100 dark:bg-gray-800 shadow-2xl border border-gray-100 dark:border-gray-700"
+                        data-alt="Digital compass pointing along a glowing path through educational video screens">
+                        <img src="assets/images/learning-path.png" alt="مسار التعلم في بوصلة"
+                            class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <h2 class="text-3xl lg:text-4xl font-black text-secondary dark:text-white mb-8 leading-tight">
+                        إحنا مش بنبيع كورسات… <br />
+                        <span class="text-primary underline decoration-wavy decoration-2 underline-offset-4">إحنا بنوفّر
+                            لك طريق</span>
+                    </h2>
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div
+                                class="min-w-[48px] size-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                                <span class="material-symbols-outlined">map</span>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-secondary dark:text-white">مسار تعلّم واضح خطوة بخطوة
+                                </h3>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm mt-1">خريطة كاملة من الصفر لحد
+                                    الاحتراف، عارف هتبدأ منين
+                                    وهتنتهي فين.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div
+                                class="min-w-[48px] size-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                                <span class="material-symbols-outlined">smart_display</span>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-secondary dark:text-white">أفضل محتوى يوتيوب (بدون
+                                    تكرار)</h3>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm mt-1">بنفلتر المحتوى وبنختارلك
+                                    الفيديوهات اللي بتشرح بجد
+                                    ومن غير حشو.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div
+                                class="min-w-[48px] size-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                                <span class="material-symbols-outlined">assignment_turned_in</span>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-secondary dark:text-white">تطبيق عملي وتاسكات</h3>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm mt-1">بعد كل فيديو أو مرحلة، فيه تاسك
+                                    لازم تحله عشان
+                                    تتأكد إنك فهمت.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div
+                                class="min-w-[48px] size-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                                <span class="material-symbols-outlined">visibility</span>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-secondary dark:text-white">متابعة حقيقية</h3>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm mt-1">مش هنسيبك لوحدك، فيه مينتور
+                                    بيتابع تقدمك ويشجعك.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div
+                                class="min-w-[48px] size-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                                <span class="material-symbols-outlined">chat</span>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-secondary dark:text-white">إجابات مفهومة وسريعة</h3>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm mt-1">لما تعطل، اسأل وهتلاقي اللي
+                                    يجاوبك ويبسطلك
+                                    المعلومة.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- How It Works (Process) Section -->
+    <section id="process" class="py-20 bg-background-light dark:bg-background-dark transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl lg:text-4xl font-black text-secondary dark:text-white mb-4">إزاي النظام بيشتغل؟</h2>
+                <p class="text-gray-600 dark:text-gray-400 text-lg">خطوات بسيطة تفصلك عن إتقان المهارة اللي بتحلم بيها
+                </p>
+            </div>
+            <div class="relative">
+                <!-- Connector Line (Hidden on Mobile) -->
+                <div
+                    class="hidden lg:block absolute top-1/2 left-0 right-0 h-1 bg-gray-200 dark:bg-gray-800 -translate-y-1/2 z-0">
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 relative z-10">
+                    <!-- Step 1 -->
+                    <div
+                        class="flex flex-col items-center text-center bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm lg:shadow-none lg:bg-transparent lg:dark:bg-transparent stagger-reveal">
+                        <div
+                            class="size-16 rounded-full bg-primary text-white flex items-center justify-center text-2xl font-bold mb-4 shadow-lg ring-4 ring-white dark:ring-gray-800">
+                            1</div>
+                        <h3 class="font-bold text-lg mb-2 dark:text-white">اختر المسار</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">حدد المجال اللي حابب تتعلمه (برمجة، تصميم،
+                            تسويق..)</p>
+                    </div>
+                    <!-- Step 2 -->
+                    <div
+                        class="flex flex-col items-center text-center bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm lg:shadow-none lg:bg-transparent lg:dark:bg-transparent stagger-reveal">
+                        <div
+                            class="size-16 rounded-full bg-white dark:bg-gray-800 border-2 border-primary text-primary flex items-center justify-center text-2xl font-bold mb-4 shadow-md lg:mt-12">
+                            2</div>
+                        <h3 class="font-bold text-lg mb-2 dark:text-white">استلم خطتك</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">خطة أسبوعية منظمة عشان تعرف هتعمل إيه كل
+                            يوم.</p>
+                    </div>
+                    <!-- Step 3 -->
+                    <div
+                        class="flex flex-col items-center text-center bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm lg:shadow-none lg:bg-transparent lg:dark:bg-transparent stagger-reveal">
+                        <div
+                            class="size-16 rounded-full bg-primary text-white flex items-center justify-center text-2xl font-bold mb-4 shadow-lg ring-4 ring-white dark:ring-gray-800">
+                            3</div>
+                        <h3 class="font-bold text-lg mb-2 dark:text-white">اتعلم بذكاء</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">شاهد الفيديوهات المختارة وطبق عليها أول
+                            بأول.</p>
+                    </div>
+                    <!-- Step 4 -->
+                    <div
+                        class="flex flex-col items-center text-center bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm lg:shadow-none lg:bg-transparent lg:dark:bg-transparent stagger-reveal">
+                        <div
+                            class="size-16 rounded-full bg-white dark:bg-gray-800 border-2 border-primary text-primary flex items-center justify-center text-2xl font-bold mb-4 shadow-md lg:mt-12">
+                            4</div>
+                        <h3 class="font-bold text-lg mb-2 dark:text-white">حل وابعت</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">خلص التاسكات وابعت أسئلتك لو فيه حاجة وقفت
+                            معاك.</p>
+                    </div>
+                    <!-- Step 5 -->
+                    <div
+                        class="flex flex-col items-center text-center bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm lg:shadow-none lg:bg-transparent lg:dark:bg-transparent stagger-reveal">
+                        <div
+                            class="size-16 rounded-full bg-primary text-white flex items-center justify-center text-2xl font-bold mb-4 shadow-lg ring-4 ring-white dark:ring-gray-800">
+                            5</div>
+                        <h3 class="font-bold text-lg mb-2 dark:text-white">قيّم مستواك</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">احصل على فيدباك ومتابعة عشان تعرف نقط ضعفك
+                            وتحسنها.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <p class="text-xl font-bold text-primary">من أول يوم… هتعرف أنت فين ورايح فين 🚀</p>
+            </div>
+        </div>
+    </section>
+    <!-- Target Audience Section -->
+    <section id="audience" class="py-20 bg-white dark:bg-background-dark transition-colors duration-300">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+            <div
+                class="bg-gray-900 dark:bg-black/40 rounded-3xl p-10 lg:p-16 text-white relative overflow-hidden border dark:border-gray-800">
+                <div class="absolute top-0 left-0 w-full h-full opacity-10"
+                    style="background-image: radial-gradient(white 1px, transparent 1px); background-size: 20px 20px;">
+                </div>
+                <h2 class="text-3xl font-black mb-8 relative z-10 text-center">بوصلة معمولة مخصوص عشان:</h2>
+                <div class="grid md:grid-cols-2 gap-6 relative z-10">
+                    <div class="flex items-center gap-4 bg-gray-800/50 p-4 rounded-xl border border-gray-700">
+                        <span class="material-symbols-outlined text-primary">savings</span>
+                        <span class="text-lg font-bold">الطلاب اللي معندهمش ميزانية للكورسات الغالية</span>
+                    </div>
+                    <div class="flex items-center gap-4 bg-gray-800/50 p-4 rounded-xl border border-gray-700">
+                        <span class="material-symbols-outlined text-primary">code</span>
+                        <span class="text-lg font-bold">اللي بيتعلم برمجة / ديزاين / مهارات رقمية</span>
+                    </div>
+                    <div class="flex items-center gap-4 bg-gray-800/50 p-4 rounded-xl border border-gray-700">
+                        <span class="material-symbols-outlined text-primary">center_focus_strong</span>
+                        <span class="text-lg font-bold">الشخص اللي زهق من التشتت وعايز ينجز</span>
+                    </div>
+                    <div class="flex items-center gap-4 bg-gray-800/50 p-4 rounded-xl border border-gray-700">
+                        <span class="material-symbols-outlined text-primary">verified</span>
+                        <span class="text-lg font-bold">اللي عايز نتيجة حقيقية مش مجرد مشاهدة فيديوهات</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Comparison Section -->
+    <section id="comparison" class="py-20 bg-background-light dark:bg-background-dark transition-colors duration-300">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-black text-secondary dark:text-white">الفرق بين بوصلة والتعلّم العشوائي</h2>
+            </div>
+            <div
+                class="overflow-x-auto custom-scrollbar rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-xl">
+                <div class="min-w-[600px]">
+                    <div
+                        class="grid grid-cols-3 bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-4">
+                        <div class="font-bold text-gray-500 dark:text-gray-400 flex items-center justify-center">وجه
+                            المقارنة</div>
+                        <div class="font-black text-xl text-primary flex items-center justify-center gap-2">
+                            <img src="assets/images/logo.jpg" alt="بوصلة" class="size-6 rounded-md object-cover" />
+                            بوصلة
+                        </div>
+                        <div class="font-bold text-gray-400 dark:text-gray-500 flex items-center justify-center">التعلّم
+                            لوحدك</div>
+                    </div>
+                    <!-- Row 1 -->
+                    <div
+                        class="grid grid-cols-3 border-b border-gray-100 dark:border-gray-800 divide-x divide-x-reverse divide-gray-100 dark:divide-gray-800">
+                        <div
+                            class="p-4 flex items-center justify-center font-bold text-gray-700 dark:text-gray-300 bg-gray-50/50 dark:bg-gray-800/30">
+                            المسار</div>
+                        <div class="p-4 flex items-center justify-center text-center bg-primary/5 dark:bg-primary/10">
+                            <span class="flex flex-col items-center gap-1">
+                                <span class="material-symbols-outlined text-green-500">check_circle</span>
+                                <span class="font-bold text-sm dark:text-gray-200">واضح ومرتب</span>
+                            </span>
+                        </div>
+                        <div class="p-4 flex items-center justify-center text-center">
+                            <span class="flex flex-col items-center gap-1">
+                                <span class="material-symbols-outlined text-red-400">cancel</span>
+                                <span class="text-gray-500 dark:text-gray-400 text-sm">عشوائي ومتخبط</span>
+                            </span>
+                        </div>
+                    </div>
+                    <!-- Row 2 -->
+                    <div
+                        class="grid grid-cols-3 border-b border-gray-100 dark:border-gray-800 divide-x divide-x-reverse divide-gray-100 dark:divide-gray-800">
+                        <div
+                            class="p-4 flex items-center justify-center font-bold text-gray-700 dark:text-gray-300 bg-gray-50/50 dark:bg-gray-800/30">
+                            المتابعة
+                        </div>
+                        <div class="p-4 flex items-center justify-center text-center bg-primary/5 dark:bg-primary/10">
+                            <span class="flex flex-col items-center gap-1">
+                                <span class="material-symbols-outlined text-green-500">check_circle</span>
+                                <span class="font-bold text-sm dark:text-gray-200">متابعة مستمرة</span>
+                            </span>
+                        </div>
+                        <div class="p-4 flex items-center justify-center text-center">
+                            <span class="flex flex-col items-center gap-1">
+                                <span class="material-symbols-outlined text-red-400">cancel</span>
+                                <span class="text-gray-500 dark:text-gray-400 text-sm">مفيش (صفر)</span>
+                            </span>
+                        </div>
+                    </div>
+                    <!-- Row 3 -->
+                    <div
+                        class="grid grid-cols-3 border-b border-gray-100 dark:border-gray-800 divide-x divide-x-reverse divide-gray-100 dark:divide-gray-800">
+                        <div
+                            class="p-4 flex items-center justify-center font-bold text-gray-700 dark:text-gray-300 bg-gray-50/50 dark:bg-gray-800/30">
+                            الأسئلة
+                        </div>
+                        <div class="p-4 flex items-center justify-center text-center bg-primary/5 dark:bg-primary/10">
+                            <span class="flex flex-col items-center gap-1">
+                                <span class="material-symbols-outlined text-green-500">check_circle</span>
+                                <span class="font-bold text-sm dark:text-gray-200">بتلاقي إجابة</span>
+                            </span>
+                        </div>
+                        <div class="p-4 flex items-center justify-center text-center">
+                            <span class="flex flex-col items-center gap-1">
+                                <span class="material-symbols-outlined text-red-400">cancel</span>
+                                <span class="text-gray-500 dark:text-gray-400 text-sm">بتدوّر وتتوه</span>
+                            </span>
+                        </div>
+                    </div>
+                    <!-- Row 4 -->
+                    <div class="grid grid-cols-3 divide-x divide-x-reverse divide-gray-100 dark:divide-gray-800">
+                        <div
+                            class="p-4 flex items-center justify-center font-bold text-gray-700 dark:text-gray-300 bg-gray-50/50 dark:bg-gray-800/30">
+                            تقييم
+                            المستوى</div>
+                        <div class="p-4 flex items-center justify-center text-center bg-primary/5 dark:bg-primary/10">
+                            <span class="flex flex-col items-center gap-1">
+                                <span class="material-symbols-outlined text-green-500">check_circle</span>
+                                <span class="font-bold text-sm dark:text-gray-200">فيدباك حقيقي</span>
+                            </span>
+                        </div>
+                        <div class="p-4 flex items-center justify-center text-center">
+                            <span class="flex flex-col items-center gap-1">
+                                <span class="material-symbols-outlined text-red-400">cancel</span>
+                                <span class="text-gray-500 dark:text-gray-400 text-sm">مش عارف أنت فين</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Pricing Section -->
+    <section class="py-20 bg-white dark:bg-background-dark transition-colors duration-300" id="pricing">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl lg:text-4xl font-black text-secondary dark:text-white mb-4">اختار الباقة المناسبة
+                    ليك</h2>
+                <p class="text-gray-600 dark:text-gray-400">استثمار بسيط في مستقبلك يوفر عليك شهور من التوهان</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+                <!-- Basic Plan -->
+                <div
+                    class="border border-gray-200 dark:border-gray-800 rounded-2xl p-6 bg-white dark:bg-gray-800 hover:shadow-lg transition-all stagger-reveal">
+                    <h3 class="text-xl font-bold text-secondary dark:text-white mb-2">البداية</h3>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm mb-6">للي محتاج خريطة ومتابعة خفيفة</p>
+                    <div class="text-3xl font-black text-secondary dark:text-white mb-2">100 <span
+                            class="text-sm font-medium text-gray-400">ج.م / شهرياً</span></div>
+                    <div
+                        class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-3 mb-6">
+                        <div class="flex items-center gap-2 mb-1">
+                            <span
+                                class="material-symbols-outlined text-green-600 dark:text-green-400 text-sm">local_offer</span>
+                            <span class="text-xs font-bold text-green-700 dark:text-green-300">عرض خاص</span>
+                        </div>
+                        <p class="text-sm font-bold text-green-800 dark:text-green-200">3 شهور بـ 250 ج.م فقط!</p>
+                        <p class="text-xs text-green-600 dark:text-green-400 mt-1">وفر 50 ج.م 🎉</p>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3 text-sm font-medium text-gray-600 dark:text-gray-300">
+                            <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            مسار تعليمي + فيديوهات منقحة
+                        </li>
+                        <li class="flex items-center gap-3 text-sm font-medium text-gray-600 dark:text-gray-300">
+                            <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            متابعة أسبوعية
+                        </li>
+                    </ul>
+                    <a href="portal/form.html"
+                        class="flex items-center justify-center w-full py-3 rounded-lg border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all">اشترك
+                        الآن</a>
+                </div>
+                <!-- Pro Plan (Popular) -->
+                <div
+                    class="border-2 border-primary rounded-2xl p-6 bg-white dark:bg-gray-800 shadow-xl relative transform lg:-translate-y-4 stagger-reveal">
+                    <div
+                        class="absolute top-0 right-1/2 translate-x-1/2 -translate-y-1/2 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">
+                        الأكثر طلباً</div>
+                    <h3 class="text-xl font-bold text-secondary dark:text-white mb-2">محترف</h3>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm mb-6">للتركيز العالي والنتيجة السريعة</p>
+                    <div class="text-3xl font-black text-secondary dark:text-white mb-2">200 <span
+                            class="text-sm font-medium text-gray-400">ج.م / شهرياً</span></div>
+                    <div class="bg-primary/10 dark:bg-primary/20 border border-primary/30 rounded-lg p-3 mb-6">
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="material-symbols-outlined text-primary text-sm">workspace_premium</span>
+                            <span class="text-xs font-bold text-primary">عرض خاص</span>
+                        </div>
+                        <p class="text-sm font-bold text-secondary dark:text-white">3 شهور بـ 500 ج.م فقط!</p>
+                        <p class="text-xs text-primary mt-1">وفر 100 ج.م 🔥</p>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3 text-sm font-medium text-secondary dark:text-gray-200">
+                            <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            كل مميزات الباقة السابقة
+                        </li>
+                        <li class="flex items-center gap-3 text-sm font-medium text-secondary dark:text-gray-200">
+                            <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            متابعة يومية لتطورك
+                        </li>
+                        <li class="flex items-center gap-3 text-sm font-medium text-secondary dark:text-gray-200">
+                            <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            رد سريع على الأسئلة
+                        </li>
+                        <li class="flex items-center gap-3 text-sm font-medium text-secondary dark:text-gray-200">
+                            <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            تقييم مستمر وتصحيح تاسكات
+                        </li>
+                    </ul>
+                    <a href="portal/form.html"
+                        class="flex items-center justify-center w-full py-3 rounded-lg bg-primary text-white font-bold hover:bg-primary-dark transition-all shadow-lg shadow-primary/20">اشترك
+                        الآن</a>
+                </div>
+                <!-- Mentor Plan -->
+                <div
+                    class="border border-gray-200 dark:border-gray-800 rounded-2xl p-6 bg-white dark:bg-gray-800 hover:shadow-lg transition-all stagger-reveal">
+                    <h3 class="text-xl font-bold text-secondary dark:text-white mb-2">منتور</h3>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm mb-6">متابعة شخصية مكثفة</p>
+                    <div class="text-3xl font-black text-secondary dark:text-white mb-6">500 <span
+                            class="text-sm font-medium text-gray-400">ج.م / شهرياً</span></div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3 text-sm font-medium text-gray-600 dark:text-gray-300">
+                            <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            متابعة شخصية 1-to-1
+                        </li>
+                        <li class="flex items-center gap-3 text-sm font-medium text-gray-600 dark:text-gray-300">
+                            <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            مكالمة أسبوعية زووم
+                        </li>
+                        <li class="flex items-center gap-3 text-sm font-medium text-gray-600 dark:text-gray-300">
+                            <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            مراجعة مشاريع كاملة (Code Review)
+                        </li>
+                    </ul>
+                    <a href="portal/form.html"
+                        class="flex items-center justify-center w-full py-3 rounded-lg border-2 border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 font-bold hover:border-primary hover:text-primary transition-all">تواصل
+                        معنا</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Final CTA -->
+    <section class="py-24 bg-gradient-to-br from-primary to-[#0e8cb5] text-white text-center">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-4xl lg:text-5xl font-black mb-6">مستعد تبدأ صح؟</h2>
+            <p class="text-xl lg:text-2xl text-white/90 mb-10 font-medium">بلاش تضيع شهور من عمرك في التخبط.. ابدأ مع
+                بوصلة وخلي طريقك واضح من النهارده.</p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="portal/form.html"
+                    class="w-full sm:w-auto bg-white text-primary text-lg font-bold py-4 px-10 rounded-xl hover:bg-gray-50 transition-all shadow-xl">
+                    🚀 ابدأ دلوقتي
+                </a>
+
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-secondary text-gray-300 py-20 border-t border-gray-800 dark:bg-black/60 relative overflow-hidden">
+        <!-- Decoration -->
+        <div
+            class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-30">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16 mb-16">
+                <!-- Column 1: Brand Info -->
+                <div class="flex flex-col gap-6">
+                    <div class="flex items-center gap-3">
+                        <img src="assets/images/logo.jpg" alt="لوجو بوصلة"
+                            class="size-12 rounded-xl object-cover shadow-lg border border-gray-700" />
+                        <span class="text-2xl font-black text-white">بوصلة</span>
+                    </div>
+                    <p class="text-sm leading-relaxed text-gray-400 max-w-xs">
+                        بوصلة هي دليلك الأمثل للتعلم الذاتي من يوتيوب. بنرسم لك الطريق، ونتابع تقدمك، ونوفر لك الدعم
+                        الفني عشان توصل لهدفك بأسرع وقت وأقل مجهود.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="https://t.me/Bousla" target="_blank" title="Telegram"
+                            class="size-10 rounded-lg bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all transform hover:-translate-y-1">
+                            <svg class="size-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M20.665 3.717l-17.73 6.837c-1.21.486-1.203 1.161-.222 1.462l4.552 1.42 10.532-6.645c.498-.303.953-.14.579.192l-8.533 7.703-.331 4.956c.488 0 .704-.223.977-.485l2.344-2.279 4.875 3.6c.898.496 1.542.241 1.767-.832l3.193-15.037c.328-1.315-.5-1.912-1.356-1.532z" />
+                            </svg>
+                        </a>
+                        <a href="https://wa.me/201210178529" target="_blank" title="WhatsApp"
+                            class="size-10 rounded-lg bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all transform hover:-translate-y-1">
+                            <svg class="size-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+                            </svg>
+                        </a>
+                        <a href="https://www.facebook.com/profile.php?id=61586180619770" target="_blank"
+                            title="Facebook"
+                            class="size-10 rounded-lg bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all transform hover:-translate-y-1">
+                            <svg class="size-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                            </svg>
+                        </a>
+                        <a href="https://www.instagram.com/bousla2026?igsh=bTRua3NnemIwNzV5" target="_blank"
+                            title="Instagram"
+                            class="size-10 rounded-lg bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all transform hover:-translate-y-1">
+                            <svg class="size-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.981 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4.01 4.01 0 110-8.019 4.01 4.01 0 010 8.019zm7.846-10.405a1.441 1.441 0 11-2.881 0 1.441 1.441 0 012.881 0z" />
+                            </svg>
+                        </a>
+                        <a href="https://www.linkedin.com/company/elbousla/" target="_blank" title="LinkedIn"
+                            class="size-10 rounded-lg bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all transform hover:-translate-y-1">
+                            <svg class="size-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Quick Links -->
+                <div>
+                    <h4 class="text-white font-bold mb-6 text-lg">روابط سريعة</h4>
+                    <ul class="space-y-4">
+                        <li><a href="#problems"
+                                class="hover:text-primary transition-colors flex items-center gap-2 font-medium"> <span
+                                    class="size-1 rounded-full bg-primary"></span> ليه بوصلة؟</a></li>
+                        <li><a href="#how-it-works"
+                                class="hover:text-primary transition-colors flex items-center gap-2 font-medium"> <span
+                                    class="size-1 rounded-full bg-primary"></span> كيف نعمل</a></li>
+                        <li><a href="#pricing"
+                                class="hover:text-primary transition-colors flex items-center gap-2 font-medium"> <span
+                                    class="size-1 rounded-full bg-primary"></span> الباقات</a></li>
+                        <li><a href="#comparison"
+                                class="hover:text-primary transition-colors flex items-center gap-2 font-medium"> <span
+                                    class="size-1 rounded-full bg-primary"></span> المقارنة</a></li>
+                        <li><a href="admin/index.html" target="_blank"
+                                class="hover:text-primary transition-colors flex items-center gap-2 font-medium"> <span
+                                    class="size-1 rounded-full bg-primary"></span> لوحة التحكم</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Tracks -->
+                <div>
+                    <h4 class="text-white font-bold mb-6 text-lg">أهم المسارات</h4>
+                    <ul class="space-y-4">
+                        <li><a href="#"
+                                class="hover:text-primary transition-colors flex items-center gap-2 font-medium"> <span
+                                    class="size-1 rounded-full bg-primary"></span> تطوير الويب</a></li>
+                        <li><a href="#"
+                                class="hover:text-primary transition-colors flex items-center gap-2 font-medium"> <span
+                                    class="size-1 rounded-full bg-primary"></span> التصميم الجرافيكى</a></li>
+                        <li><a href="#"
+                                class="hover:text-primary transition-colors flex items-center gap-2 font-medium"> <span
+                                    class="size-1 rounded-full bg-primary"></span> التسويق الرقمي</a></li>
+                        <li><a href="#"
+                                class="hover:text-primary transition-colors flex items-center gap-2 font-medium"> <span
+                                    class="size-1 rounded-full bg-primary"></span> تحليل البيانات</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div
+                class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-medium text-gray-500">
+                <p>© 2026 بوصلة. جميع الحقوق محفوظة.</p>
+                <div class="flex gap-6">
+                    <a href="privacy.html" class="hover:text-gray-300">سياسة الخصوصية</a>
+                    <a href="#" class="hover:text-gray-300">الشروط والأحكام</a>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span>صنع بكل حب بواسطة فريق</span>
+                    <span class="text-primary font-bold">بوصلة</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Appwrite Tracking -->
+    <script src="https://cdn.jsdelivr.net/npm/appwrite@16.1.0"></script>
+    <script src="assets/js/appwrite.js"></script>
+    <script>
+        // const { databases, DATABASE_ID, COLLECTIONS, ID } = window.appwrite; 
+
+        // Advanced Tracking Variables
+        let startTime = Date.now();
+        let scrollDepth = 0;
+        const viewedSections = new Set();
+
+        // Track Visit
+        async function trackVisit() {
+            try {
+                const userAgent = navigator.userAgent;
+                let deviceType = "Desktop";
+                if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent)) {
+                    deviceType = "Mobile";
+                } else if (/Tablet|iPad/i.test(userAgent)) {
+                    deviceType = "Tablet";
+                }
+
+                // Detect OS
+                let os = "Other";
+                if (userAgent.indexOf("Win") != -1) os = "Windows";
+                if (userAgent.indexOf("Mac") != -1) os = "MacOS";
+                if (userAgent.indexOf("X11") != -1) os = "UNIX";
+                if (userAgent.indexOf("Linux") != -1) os = "Linux";
+                if (/Android/.test(userAgent)) os = "Android";
+                if (/iPhone|iPad|iPod/.test(userAgent)) os = "iOS";
+
+                // Detect Referrer
+                let referrer = document.referrer || "Direct";
+                let referrerSource = "Direct";
+                if (referrer.includes("facebook.com")) referrerSource = "Facebook";
+                else if (referrer.includes("linkedin.com")) referrerSource = "LinkedIn";
+                else if (referrer.includes("instagram.com")) referrerSource = "Instagram";
+                else if (referrer.includes("t.co") || referrer.includes("twitter.com")) referrerSource = "Twitter";
+                else if (referrer.includes("google.com")) referrerSource = "Google";
+                else if (referrer !== "Direct") {
+                    try {
+                        referrerSource = new URL(referrer).hostname;
+                    } catch (e) {
+                        referrerSource = "External Link";
+                    }
+                }
+
+                // Get Location (Approximate)
+                let location = "Unknown";
+                try {
+                    const locRes = await fetch('https://ipapi.co/json/');
+                    const locData = await locRes.json();
+                    location = `${locData.city || ''}, ${locData.country_name || ''}`;
+                } catch (e) { console.error("Location fetch failed"); }
+
+                const visitDoc = await databases.createDocument(
+                    DATABASE_ID,
+                    COLLECTIONS.PAGE_VISITS,
+                    ID.unique(),
+                    {
+                        timestamp: new Date().toISOString(),
+                        device: deviceType,
+                        os: os,
+                        referrer: referrer,
+                        referrerSource: referrerSource,
+                        location: location,
+                        userAgent: userAgent,
+                        page: window.location.pathname,
+                        duration: 0,
+                        events: [], // Appwrite stores this as JSON string if defined as string, or array of strings. 
+                        // Assuming attribute is defined as string (for JSON) or string array.
+                        maxScroll: 0,
+                        viewedSections: []
+                    }
+                );
+
+                sessionStorage.setItem('v_doc_id', visitDoc.$id);
+            } catch (error) {
+                console.error("Tracking failed:", error);
+            }
+        }
+
+        // Event Tracking (Clicks)
+        async function trackEvent(eventName, eventData = {}) {
+            const docId = sessionStorage.getItem('v_doc_id');
+            if (!docId) return;
+
+            try {
+                // In Appwrite, we need to get the document first to append to array, 
+                // or use a function if it's high volume. For simplicity here:
+                const doc = await databases.getDocument(DATABASE_ID, COLLECTIONS.PAGE_VISITS, docId);
+                const events = doc.events || [];
+                events.push(JSON.stringify({
+                    name: eventName,
+                    data: eventData,
+                    timestamp: new Date().toISOString()
+                }));
+
+                await databases.updateDocument(DATABASE_ID, COLLECTIONS.PAGE_VISITS, docId, {
+                    events: events
+                });
+            } catch (e) {
+                console.error("Event track failed", e);
+            }
+        }
+
+        // Update Duration and Scroll
+        async function updateStats() {
+            const docId = sessionStorage.getItem('v_doc_id');
+            if (!docId) return;
+
+            const duration = Math.round((Date.now() - startTime) / 1000);
+            try {
+                await databases.updateDocument(DATABASE_ID, COLLECTIONS.PAGE_VISITS, docId, {
+                    duration: duration,
+                    maxScroll: scrollDepth,
+                    viewedSections: Array.from(viewedSections)
+                });
+            } catch (e) {
+                console.error("Stats update failed", e);
+            }
+        }
+
+        // Run once on load
+        window.addEventListener('load', () => {
+            if (!sessionStorage.getItem('v_tracked')) {
+                trackVisit();
+                sessionStorage.setItem('v_tracked', 'true');
+            }
+
+            // Click Tracking
+            document.addEventListener('click', (e) => {
+                const btn = e.target.closest('button, a');
+                if (btn) {
+                    trackEvent('click', {
+                        text: btn.innerText.trim().substring(0, 30),
+                        id: btn.id,
+                        classes: btn.className,
+                        href: btn.href
+                    });
+                }
+            });
+
+            // Scroll Tracking
+            window.addEventListener('scroll', () => {
+                const currentDepth = Math.round((window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100);
+                if (currentDepth > scrollDepth) scrollDepth = currentDepth;
+            });
+
+            // Section View Tracking
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const sectionName = entry.target.id || entry.target.tagName;
+                        viewedSections.add(sectionName);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            document.querySelectorAll('section, header, footer').forEach(el => sectionObserver.observe(el));
+
+            // Update periodically
+            setInterval(updateStats, 10000);
+            window.addEventListener('beforeunload', updateStats);
+        });
+    </script>
+</body>
+
+</html>

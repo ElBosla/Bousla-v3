@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html class="light" dir="rtl" lang="ar">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>بوصلة - استمارة الانضمام</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&amp;family=Manrope:wght@400;500;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link rel="icon" href="../assets/images/logo.jpg" type="image/jpeg" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13b6ec",
+                        "primary-dark": "#0e8cb5",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#101d22",
+                        "secondary": "#263238",
+                    },
+                    fontFamily: {
+                        "display": ["Almarai", "sans-serif"],
+                        "body": ["Almarai", "sans-serif"],
+                    },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Almarai', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .path-card input:checked+div,
+        .plan-card input:checked+div {
+            border-color: #13b6ec;
+            background-color: rgba(19, 182, 236, 0.05);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(19, 182, 236, 0.1);
+        }
+    </style>
+</head>
+
+<body class="bg-background-light text-secondary antialiased overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-3">
+                    <img src="../assets/images/logo.jpg" alt="لوجو بوصلة"
+                        class="size-11 rounded-xl object-cover shadow-sm" />
+                    <span class="text-2xl font-extrabold tracking-tight text-secondary">بوصلة</span>
+                </div>
+                <a href="../index.html"
+                    class="text-sm font-bold text-gray-600 hover:text-primary transition-colors flex items-center gap-2">
+                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    العودة للرئيسية
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="py-12 lg:py-20">
+        <div class="max-w-4xl mx-auto px-4">
+            <!-- Header Section -->
+            <div class="text-center mb-12">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary mb-4">
+                    <span class="material-symbols-outlined text-sm">rocket_launch</span>
+                    <span class="text-xs font-bold">ابدأ رحلتك التعليمية اليوم</span>
+                </div>
+                <h1 class="text-3xl lg:text-5xl font-black text-secondary mb-4">استمارة تحديد المسار</h1>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto font-medium">
+                    املأ بياناتك واختار المسار المناسب ليك عشان تبدأ تتعلم بذكاء مع بوصلة وتوصل لهدفك في أسرع وقت.
+                </p>
+            </div>
+
+            <!-- Form Container -->
+            <div
+                class="bg-white rounded-3xl p-5 md:p-8 lg:p-12 shadow-xl shadow-gray-200/50 border border-gray-100 relative overflow-hidden">
+                <div
+                    class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full -mr-16 -mt-16 pointer-events-none">
+                </div>
+
+                <form id="employmentForm" class="relative z-10 space-y-8">
+                    <!-- Personal Info Section -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label for="name" class="text-sm font-bold text-gray-700 block mr-1">الاسم الكامل</label>
+                            <input type="text" id="name" required
+                                class="w-full h-12 bg-gray-50 border-gray-200 rounded-xl focus:ring-primary focus:border-primary font-medium transition-all"
+                                placeholder="أدخل اسمك بالكامل">
+                        </div>
+                        <div class="space-y-2">
+                            <label for="phone" class="text-sm font-bold text-gray-700 block mr-1">رقم الهاتف</label>
+                            <input type="tel" id="phone" required
+                                class="w-full h-12 bg-gray-50 border-gray-200 rounded-xl focus:ring-primary focus:border-primary font-medium transition-all"
+                                placeholder="01xxxxxxxxx">
+                        </div>
+                    </div>
+
+                    <!-- Path Selection Section -->
+                    <div class="space-y-4">
+                        <label class="text-sm font-bold text-gray-700 block mr-1">اختار المسار التعليمي</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+                            <!-- Path 1: Web Development -->
+                            <label class="path-card cursor-pointer group">
+                                <input type="radio" name="specialization" value="Web Development" class="hidden"
+                                    required>
+                                <div
+                                    class="p-4 md:p-6 border-2 border-gray-100 rounded-2xl text-center transition-all duration-300 group-hover:border-primary/30 h-full flex flex-col justify-center">
+                                    <div
+                                        class="size-12 md:size-14 bg-blue-50 text-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-3 md:mb-4 group-hover:scale-110 transition-transform">
+                                        <span class="material-symbols-outlined text-2xl md:text-3xl">code</span>
+                                    </div>
+                                    <h3 class="font-bold text-secondary text-base md:text-lg">Web Development</h3>
+                                    <p class="text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2">تطوير الويب</p>
+                                </div>
+                            </label>
+
+                            <!-- Path 2: Freelancing -->
+                            <label class="path-card cursor-pointer group">
+                                <input type="radio" name="specialization" value="Freelancing" class="hidden">
+                                <div
+                                    class="p-4 md:p-6 border-2 border-gray-100 rounded-2xl text-center transition-all duration-300 group-hover:border-primary/30 h-full flex flex-col justify-center">
+                                    <div
+                                        class="size-12 md:size-14 bg-amber-50 text-amber-500 rounded-2xl flex items-center justify-center mx-auto mb-3 md:mb-4 group-hover:scale-110 transition-transform">
+                                        <span class="material-symbols-outlined text-2xl md:text-3xl">work_history</span>
+                                    </div>
+                                    <h3 class="font-bold text-secondary text-base md:text-lg">Freelancing</h3>
+                                    <p class="text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2">العمل الحر</p>
+                                </div>
+                            </label>
+
+                            <!-- Path 3: Microsoft Office -->
+                            <label class="path-card cursor-pointer group">
+                                <input type="radio" name="specialization" value="Microsoft Office" class="hidden">
+                                <div
+                                    class="p-4 md:p-6 border-2 border-gray-100 rounded-2xl text-center transition-all duration-300 group-hover:border-primary/30 h-full flex flex-col justify-center">
+                                    <div
+                                        class="size-12 md:size-14 bg-teal-50 text-teal-500 rounded-2xl flex items-center justify-center mx-auto mb-3 md:mb-4 group-hover:scale-110 transition-transform">
+                                        <span class="material-symbols-outlined text-2xl md:text-3xl">description</span>
+                                    </div>
+                                    <h3 class="font-bold text-secondary text-base md:text-lg">Microsoft Office</h3>
+                                    <p class="text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2">مايكروسوفت أوفيس</p>
+                                </div>
+                            </label>
+
+                            <!-- Path 4: Digital Marketing (Disabled) -->
+                            <div class="path-card cursor-not-allowed opacity-60 relative">
+                                <div
+                                    class="p-4 md:p-6 border-2 border-gray-100 rounded-2xl text-center h-full flex flex-col justify-center bg-gray-50">
+                                    <div class="absolute top-2 left-2">
+                                        <span
+                                            class="px-2 py-1 bg-gray-200 text-gray-600 text-[10px] font-bold rounded-full">قريباً</span>
+                                    </div>
+                                    <div
+                                        class="size-12 md:size-14 bg-gray-100 text-gray-400 rounded-2xl flex items-center justify-center mx-auto mb-3 md:mb-4">
+                                        <span class="material-symbols-outlined text-2xl md:text-3xl">campaign</span>
+                                    </div>
+                                    <h3 class="font-bold text-gray-400 text-base md:text-lg">Digital Marketing</h3>
+                                    <p class="text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2">التسويق الرقمي</p>
+                                </div>
+                            </div>
+
+                            <!-- Path 5: Content Creation (Disabled) -->
+                            <div class="path-card cursor-not-allowed opacity-60 relative">
+                                <div
+                                    class="p-4 md:p-6 border-2 border-gray-100 rounded-2xl text-center h-full flex flex-col justify-center bg-gray-50">
+                                    <div class="absolute top-2 left-2">
+                                        <span
+                                            class="px-2 py-1 bg-gray-200 text-gray-600 text-[10px] font-bold rounded-full">قريباً</span>
+                                    </div>
+                                    <div
+                                        class="size-12 md:size-14 bg-gray-100 text-gray-400 rounded-2xl flex items-center justify-center mx-auto mb-3 md:mb-4">
+                                        <span
+                                            class="material-symbols-outlined text-2xl md:text-3xl">video_library</span>
+                                    </div>
+                                    <h3 class="font-bold text-gray-400 text-base md:text-lg">Content Creation</h3>
+                                    <p class="text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2">صناعة المحتوى</p>
+                                </div>
+                            </div>
+
+                            <!-- Path 6: Tech Skills (Disabled) -->
+                            <div class="path-card cursor-not-allowed opacity-60 relative">
+                                <div
+                                    class="p-4 md:p-6 border-2 border-gray-100 rounded-2xl text-center h-full flex flex-col justify-center bg-gray-50">
+                                    <div class="absolute top-2 left-2">
+                                        <span
+                                            class="px-2 py-1 bg-gray-200 text-gray-600 text-[10px] font-bold rounded-full">قريباً</span>
+                                    </div>
+                                    <div
+                                        class="size-12 md:size-14 bg-gray-100 text-gray-400 rounded-2xl flex items-center justify-center mx-auto mb-3 md:mb-4">
+                                        <span class="material-symbols-outlined text-2xl md:text-3xl">memory</span>
+                                    </div>
+                                    <h3 class="font-bold text-gray-400 text-base md:text-lg">Tech Skills</h3>
+                                    <p class="text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2">المهارات التقنية</p>
+                                </div>
+                            </div>
+
+                            <!-- Path 7: Soft Skills (Disabled) -->
+                            <div class="path-card cursor-not-allowed opacity-60 relative">
+                                <div
+                                    class="p-4 md:p-6 border-2 border-gray-100 rounded-2xl text-center h-full flex flex-col justify-center bg-gray-50">
+                                    <div class="absolute top-2 left-2">
+                                        <span
+                                            class="px-2 py-1 bg-gray-200 text-gray-600 text-[10px] font-bold rounded-full">قريباً</span>
+                                    </div>
+                                    <div
+                                        class="size-12 md:size-14 bg-gray-100 text-gray-400 rounded-2xl flex items-center justify-center mx-auto mb-3 md:mb-4">
+                                        <span class="material-symbols-outlined text-2xl md:text-3xl">psychology</span>
+                                    </div>
+                                    <h3 class="font-bold text-gray-400 text-base md:text-lg">Soft Skills</h3>
+                                    <p class="text-[10px] md:text-xs text-gray-400 mt-1 md:mt-2">المهارات الشخصية</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Subscription Plan Section -->
+                    <div class="space-y-4">
+                        <label class="text-sm font-bold text-gray-700 block mr-1">اختار باقة الاشتراك</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <!-- Plan 1: Basic Monthly -->
+                            <label class="plan-card cursor-pointer group">
+                                <input type="radio" name="plan" value="البداية (100 ج.م)" class="hidden" required>
+                                <div
+                                    class="p-6 border-2 border-gray-100 rounded-2xl text-center transition-all duration-300 group-hover:border-primary/30 h-full flex flex-col justify-center">
+                                    <div
+                                        class="size-12 bg-gray-50 text-gray-400 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                                        <span class="material-symbols-outlined text-2xl">star_outline</span>
+                                    </div>
+                                    <h3 class="font-bold text-secondary text-sm md:text-base">البداية</h3>
+                                    <p class="text-[10px] font-black text-primary mt-1">100 ج.م / شهرياً</p>
+                                </div>
+                            </label>
+
+                            <!-- Plan 2: Basic 3 Months -->
+                            <label class="plan-card cursor-pointer group">
+                                <input type="radio" name="plan" value="عرض 3 شهور - البداية (250 ج.م)" class="hidden">
+                                <div
+                                    class="p-6 border-2 border-gray-100 rounded-2xl text-center transition-all duration-300 group-hover:border-primary/30 h-full flex flex-col justify-center relative">
+                                    <div class="absolute top-2 right-2">
+                                        <span
+                                            class="px-2 py-1 bg-green-500 text-white text-[10px] font-bold rounded-full">عرض</span>
+                                    </div>
+                                    <div
+                                        class="size-12 bg-green-50 text-green-500 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                                        <span class="material-symbols-outlined text-2xl">workspace_premium</span>
+                                    </div>
+                                    <h3 class="font-bold text-secondary text-sm md:text-base">البداية - 3 شهور</h3>
+                                    <p class="text-[10px] font-black text-green-600 mt-1">250 ج.م / 3 شهور</p>
+                                </div>
+                            </label>
+
+                            <!-- Plan 3: Pro Monthly -->
+                            <label class="plan-card cursor-pointer group">
+                                <input type="radio" name="plan" value="محترف (200 ج.م)" class="hidden">
+                                <div
+                                    class="p-6 border-2 border-gray-100 rounded-2xl text-center transition-all duration-300 group-hover:border-primary/30 h-full flex flex-col justify-center">
+                                    <div
+                                        class="size-12 bg-primary/10 text-primary rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                                        <span class="material-symbols-outlined text-2xl">auto_awesome</span>
+                                    </div>
+                                    <h3 class="font-bold text-secondary text-sm md:text-base">محترف</h3>
+                                    <p class="text-[10px] font-black text-primary mt-1">200 ج.م / شهرياً</p>
+                                </div>
+                            </label>
+
+                            <!-- Plan 4: Pro 3 Months -->
+                            <label class="plan-card cursor-pointer group">
+                                <input type="radio" name="plan" value="عرض 3 شهور - محترف (500 ج.م)" class="hidden">
+                                <div
+                                    class="p-6 border-2 border-gray-100 rounded-2xl text-center transition-all duration-300 group-hover:border-primary/30 h-full flex flex-col justify-center relative">
+                                    <div class="absolute top-2 right-2">
+                                        <span
+                                            class="px-2 py-1 bg-primary text-white text-[10px] font-bold rounded-full">عرض</span>
+                                    </div>
+                                    <div
+                                        class="size-12 bg-primary/20 text-primary rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                                        <span class="material-symbols-outlined text-2xl">diamond</span>
+                                    </div>
+                                    <h3 class="font-bold text-secondary text-sm md:text-base">محترف - 3 شهور</h3>
+                                    <p class="text-[10px] font-black text-primary mt-1">500 ج.م / 3 شهور</p>
+                                </div>
+                            </label>
+
+                            <!-- Plan 3: Mentor -->
+                            <label class="plan-card cursor-pointer group">
+                                <input type="radio" name="plan" value="منتور (500 ج.م)" class="hidden">
+                                <div
+                                    class="p-6 border-2 border-gray-100 rounded-2xl text-center transition-all duration-300 group-hover:border-primary/30 h-full flex flex-col justify-center">
+                                    <div
+                                        class="size-12 bg-secondary/10 text-secondary rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                                        <span class="material-symbols-outlined text-2xl">verified_user</span>
+                                    </div>
+                                    <h3 class="font-bold text-secondary text-sm md:text-base">منتور</h3>
+                                    <p class="text-[10px] font-black text-primary mt-1">500 ج.م / شهرياً</p>
+                                </div>
+                            </label>
+
+                            <!-- Plan 4: Free Consultation -->
+                            <label class="plan-card cursor-pointer group">
+                                <input type="radio" name="plan" value="استشارة مجانية" class="hidden">
+                                <div
+                                    class="p-6 border-2 border-gray-100 rounded-2xl text-center transition-all duration-300 group-hover:border-primary/30 h-full flex flex-col justify-center">
+                                    <div
+                                        class="size-12 bg-green-50 text-green-500 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                                        <span class="material-symbols-outlined text-2xl">event_available</span>
+                                    </div>
+                                    <h3 class="font-bold text-secondary text-sm md:text-base">استشارة مجانية</h3>
+                                    <p class="text-[10px] font-black text-green-600 mt-1">0 ج.م / لمرة واحدة</p>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Portfolio & Bio Section -->
+                    <div class="space-y-6">
+                        <div class="space-y-2">
+                            <label for="portfolio" class="text-sm font-bold text-gray-700 block mr-1">رابط معرض الأعمال
+                                أو لينكد إن (اختياري)</label>
+                            <input type="url" id="portfolio"
+                                class="w-full h-12 bg-gray-50 border-gray-200 rounded-xl focus:ring-primary focus:border-primary font-medium transition-all"
+                                placeholder="https://...">
+                        </div>
+                        <div class="space-y-2">
+                            <label for="bio" class="text-sm font-bold text-gray-700 block mr-1">ليه عايز تنضم
+                                لبوصلة؟</label>
+                            <textarea id="bio" rows="4" required
+                                class="w-full bg-gray-50 border-gray-200 rounded-xl focus:ring-primary focus:border-primary font-medium transition-all p-4"
+                                placeholder="احكي لنا عن أهدافك وإيه اللي مخليك مهتم بالمجال ده..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="pt-4">
+                        <button type="submit"
+                            class="btn-submit w-full h-14 bg-primary hover:bg-primary-dark text-white font-black text-lg rounded-2xl shadow-xl shadow-primary/25 transition-all transform hover:-translate-y-1 flex items-center justify-center gap-3">
+                            <span>إرسال الطلب الآن</span>
+                            <span class="material-symbols-outlined">send</span>
+                        </button>
+                    </div>
+                </form>
+
+                <div id="successMessage"
+                    class="hidden mt-8 p-6 bg-green-50 border border-green-100 rounded-2xl text-center animate-bounce">
+                    <div
+                        class="size-12 bg-green-500 text-white rounded-full flex items-center justify-center mx-auto mb-3">
+                        <span class="material-symbols-outlined text-2xl">check</span>
+                    </div>
+                    <h3 class="font-bold text-green-800 text-lg mb-1">تم إرسال طلبك بنجاح!</h3>
+                    <p class="text-green-600 text-sm">سنقوم بالتواصل معك في أقرب وقت عبر الواتساب أو الهاتف.</p>
+                </div>
+            </div>
+
+            <!-- Perks Mention -->
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="flex items-center gap-3 text-gray-500">
+                    <span class="material-symbols-outlined text-primary">verified</span>
+                    <span class="text-sm font-bold">خطة تعليمية مجربة</span>
+                </div>
+                <div class="flex items-center gap-3 text-gray-500">
+                    <span class="material-symbols-outlined text-primary">support_agent</span>
+                    <span class="text-sm font-bold">دعم ومتابعة مستمرة</span>
+                </div>
+                <div class="flex items-center gap-3 text-gray-500">
+                    <span class="material-symbols-outlined text-primary">groups</span>
+                    <span class="text-sm font-bold">مجتمع تعليمي نشط</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-secondary text-gray-400 py-12 border-t border-gray-800 mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="flex flex-col items-center gap-4 mb-6">
+                <img src="../assets/images/logo.jpg" alt="لوجو بوصلة"
+                    class="size-16 rounded-2xl object-cover shadow-lg mb-2" />
+                <span class="text-xl font-extrabold text-white">بوصلة</span>
+            </div>
+            <div class="text-xs text-gray-600">
+                © 2026 بوصلة. جميع الحقوق محفوظة.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Appwrite SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/appwrite@16.1.0"></script>
+    <script src="../assets/js/appwrite.js"></script>
+
+    <script>
+        // استخدام المتغيرات المعرفة مسبقاً في appwrite-config.js
+        // const { databases, DATABASE_ID, COLLECTIONS, ID } = window.appwrite; 
+
+        // معالجة إرسال الاستمارة
+        document.getElementById('employmentForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const submitBtn = document.querySelector('.btn-submit');
+            const successMsg = document.getElementById('successMessage');
+
+            submitBtn.disabled = true;
+            submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            submitBtn.querySelector('span:first-child').textContent = 'جاري الإرسال...';
+
+            // Get values
+            const selectedSpecialization = document.querySelector('input[name="specialization"]:checked').value;
+            const selectedPlan = document.querySelector('input[name="plan"]:checked').value;
+
+            const applicantData = {
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                specialization: selectedSpecialization,
+                plan: selectedPlan,
+                status: 'في الانتظار',
+                paymentStatus: 'unpaid',
+                portfolio: document.getElementById('portfolio').value || 'غير متوفر',
+                bio: document.getElementById('bio').value,
+                timestamp: new Date().toISOString()
+            };
+
+            try {
+                await databases.createDocument(
+                    DATABASE_ID,
+                    COLLECTIONS.APPLICANTS,
+                    ID.unique(),
+                    applicantData
+                );
+                successMsg.classList.remove('hidden');
+                document.getElementById('employmentForm').classList.add('hidden');
+                successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } catch (error) {
+                console.error("Error adding document: ", error);
+                alert("حدث خطأ أثناء إرسال البيانات: " + error.message);
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                submitBtn.querySelector('span:first-child').textContent = 'إرسال الطلب الآن';
+            }
+        });
+    </script>
+</body>
+
+</html>

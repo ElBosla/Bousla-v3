@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" dir="rtl" lang="ar">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>بوصلة - برنامج التدريب العملي</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&amp;family=Manrope:wght@400;500;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link rel="icon" href="../assets/images/logo.jpg" type="image/jpeg" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13b6ec",
+                        "primary-dark": "#0e8cb5",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#101d22",
+                        "secondary": "#263238",
+                    },
+                    fontFamily: {
+                        "display": ["Almarai", "sans-serif"],
+                        "body": ["Almarai", "sans-serif"],
+                    },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Almarai', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .path-card input:checked+div {
+            border-color: #13b6ec;
+            background-color: rgba(19, 182, 236, 0.05);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(19, 182, 236, 0.1);
+        }
+    </style>
+    <script>
+        if (localStorage.getItem('color-theme') === 'dark') {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+        function toggleDarkMode() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        }
+    </script>
+</head>
+
+<body
+    class="bg-background-light text-secondary antialiased overflow-x-hidden transition-colors duration-300 dark:bg-background-dark dark:text-gray-100">
+
+    <!-- Navigation -->
+    <nav
+        class="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-md border-b border-gray-100 transition-colors duration-300 dark:bg-background-dark/90 dark:border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <a href="../index.html" class="flex items-center gap-2">
+                        <img src="../assets/images/logo.jpg" alt="بوصلة"
+                            class="size-10 sm:size-12 rounded-xl object-cover shadow-sm" />
+                        <span
+                            class="hidden sm:inline text-2xl font-extrabold tracking-tight text-secondary dark:text-white">بوصلة</span>
+                    </a>
+                </div>
+                <div class="flex items-center gap-2 sm:gap-4">
+                    <button onclick="toggleDarkMode()"
+                        class="p-2.5 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none rounded-lg text-sm transition-colors">
+                        <span class="material-symbols-outlined dark:hidden">dark_mode</span>
+                        <span class="material-symbols-outlined hidden dark:block">light_mode</span>
+                    </button>
+                    <a href="#apply"
+                        class="bg-primary hover:bg-primary-dark text-white text-[11px] sm:text-sm font-bold py-2 px-4 sm:py-2.5 sm:px-6 rounded-lg transition-all shadow-lg shadow-primary/20 transform hover:-translate-y-0.5">
+                        قدّم الآن
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header
+        class="relative bg-white overflow-hidden py-20 lg:py-32 transition-colors duration-300 dark:bg-background-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary w-fit mx-auto mb-6">
+                <span class="material-symbols-outlined text-sm">work</span>
+                <span class="text-xs font-bold">محاكاة لبيئة العمل الحقيقية</span>
+            </div>
+            <h1 class="text-4xl lg:text-6xl font-black leading-tight text-secondary dark:text-white mb-6">
+                مش مجرد كورس... <span class="text-primary">دي تجربة شغل بجد</span>
+            </h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400 font-medium leading-relaxed max-w-2xl mx-auto mb-10">
+                فرصة تتحول من متعلّم لمتدرب بيشتغل في شركة حقيقية، بتستلم تاسكات، بتلتزم بـ Deadlines، وبتاخد فيدباك
+                يطوّر مستواك عشان تكون جاهز لسوق العمل.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#levels"
+                    class="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 text-secondary dark:text-white px-6 py-3 rounded-xl font-bold hover:bg-gray-200 dark:hover:bg-gray-700 transition-all">
+                    <span class="material-symbols-outlined">network_node</span>
+                    رحلة التدريب
+                </a>
+                <a href="#pricing"
+                    class="flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-xl font-bold hover:bg-primary-dark transition-all shadow-xl shadow-primary/20">
+                    <span class="material-symbols-outlined">attach_money</span>
+                    باقات التدريب
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section class="py-20 bg-gray-50 dark:bg-background-dark/50 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div
+                    class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
+                    <div
+                        class="size-12 bg-blue-100 dark:bg-blue-900/30 text-blue-600 rounded-xl flex items-center justify-center mb-4">
+                        <span class="material-symbols-outlined">domain</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 dark:text-white">بيئة شركات</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">هتشتغل وكأنك موظف في شركة، بتستلم شغل وتسلمه.
+                    </p>
+                </div>
+                <div
+                    class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
+                    <div
+                        class="size-12 bg-green-100 dark:bg-green-900/30 text-green-600 rounded-xl flex items-center justify-center mb-4">
+                        <span class="material-symbols-outlined">task</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 dark:text-white">تاسكات حقيقية</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">مشاريع من قلب السوق مش مجرد أمثلة تعليمية.</p>
+                </div>
+                <div
+                    class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
+                    <div
+                        class="size-12 bg-orange-100 dark:bg-orange-900/30 text-orange-600 rounded-xl flex items-center justify-center mb-4">
+                        <span class="material-symbols-outlined">groups</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 dark:text-white">شغل Team</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">هتتعلم إزاي تتعامل مع التيم وتستخدم أدوات الشغل
+                        زي Git.</p>
+                </div>
+                <div
+                    class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
+                    <div
+                        class="size-12 bg-purple-100 dark:bg-purple-900/30 text-purple-600 rounded-xl flex items-center justify-center mb-4">
+                        <span class="material-symbols-outlined">trending_up</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 dark:text-white">ترقية وتطور</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">أثبت كفاءتك واتنقل لمستوى أعلى وتاسكات مدفوعة.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Levels Section -->
+    <section id="levels" class="py-20 bg-white dark:bg-background-dark transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-black text-secondary dark:text-white mb-4">مستويات المتدربين</h2>
+                <p class="text-gray-600 dark:text-gray-400">تدرّج طبيعي بيحاكي السلم الوظيفي</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Trainee -->
+                <div
+                    class="relative bg-gray-50 dark:bg-gray-800/50 p-8 rounded-2xl border-2 border-transparent hover:border-gray-200 dark:hover:border-gray-700 transition-all">
+                    <span
+                        class="absolute -top-4 right-8 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-4 py-1 rounded-full text-xs font-bold">البداية</span>
+                    <h3 class="text-2xl font-bold text-secondary dark:text-white mb-4">Trainee</h3>
+                    <ul class="space-y-3 text-sm text-gray-600 dark:text-gray-300">
+                        <li class="flex items-center gap-2"><span
+                                class="material-symbols-outlined text-green-500 text-sm">check</span> لسة بتبدأ تطبق
+                            وتفهم الدنيا</li>
+                        <li class="flex items-center gap-2"><span
+                                class="material-symbols-outlined text-green-500 text-sm">check</span> بتستلم تاسكات
+                            بسيطة ومباشرة</li>
+                        <li class="flex items-center gap-2"><span
+                                class="material-symbols-outlined text-green-500 text-sm">check</span> تركيز كامل على
+                            التعلم من الأخطاء</li>
+                    </ul>
+                </div>
+                <!-- Junior -->
+                <div
+                    class="relative bg-white dark:bg-gray-800 p-8 rounded-2xl border-2 border-primary/20 shadow-lg transform md:-translate-y-4">
+                    <span
+                        class="absolute -top-4 right-8 bg-primary text-white px-4 py-1 rounded-full text-xs font-bold">المستوى
+                        الحالي</span>
+                    <h3 class="text-2xl font-bold text-secondary dark:text-white mb-4">Junior</h3>
+                    <ul class="space-y-3 text-sm text-gray-600 dark:text-gray-300">
+                        <li class="flex items-center gap-2"><span
+                                class="material-symbols-outlined text-primary text-sm">check</span> بتشارك في مشاريع
+                            قائمة فعلاً</li>
+                        <li class="flex items-center gap-2"><span
+                                class="material-symbols-outlined text-primary text-sm">check</span> بتشتغل ضمن تيم
+                            ومنتجات حقيقية</li>
+                        <li class="flex items-center gap-2"><span
+                                class="material-symbols-outlined text-primary text-sm">check</span> ليك أولوية في
+                            التقييم</li>
+                    </ul>
+                </div>
+                <!-- Advanced -->
+                <div class="relative bg-gray-900 text-white p-8 rounded-2xl shadow-xl overflow-hidden">
+                    <div
+                        class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/20 to-transparent pointer-events-none">
+                    </div>
+                    <span
+                        class="absolute -top-4 right-8 bg-yellow-500 text-black px-4 py-1 rounded-full text-xs font-bold">الهدف</span>
+                    <h3 class="text-2xl font-bold mb-4 relative z-10">Advanced</h3>
+                    <ul class="space-y-3 text-sm text-gray-300 relative z-10">
+                        <li class="flex items-center gap-2"><span
+                                class="material-symbols-outlined text-yellow-500 text-sm">star</span> قيادة مصغرة
+                            للمشاريع</li>
+                        <li class="flex items-center gap-2"><span
+                                class="material-symbols-outlined text-yellow-500 text-sm">star</span> تاسكات مدفوعة
+                            الأجر (Freelance)</li>
+                        <li class="flex items-center gap-2"><span
+                                class="material-symbols-outlined text-yellow-500 text-sm">star</span> تأهيل مباشر
+                            للتوظيف</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 bg-gray-50 dark:bg-background-dark/50 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-black text-secondary dark:text-white mb-4">باقات التدريب</h2>
+                <p class="text-gray-600 dark:text-gray-400">أسعار رمزية مقابل تجربة حقيقية</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Starter -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-200 dark:border-gray-700">
+                    <h3 class="text-xl font-bold text-secondary dark:text-white">Starter</h3>
+                    <div class="text-3xl font-black text-primary my-4">99 <span
+                            class="text-sm text-gray-400 font-medium">جنيه / شهر</span></div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-300"><span
+                                class="material-symbols-outlined text-green-500">check</span> تاسكات تدريبية تحاكي السوق
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-300"><span
+                                class="material-symbols-outlined text-green-500">check</span> Workflow حقيقي (تنفيذ -
+                            تسليم)</li>
+                        <li class="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-300"><span
+                                class="material-symbols-outlined text-green-500">check</span> تقييم أساسي</li>
+                    </ul>
+                    <button onclick="selectPackage('starter')"
+                        class="w-full py-3 rounded-xl border border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all">اختر
+                        الباقة</button>
+                </div>
+                <!-- Professional -->
+                <div
+                    class="bg-white dark:bg-gray-800 p-6 rounded-2xl border-2 border-primary relative transform scale-105 shadow-xl">
+                    <span
+                        class="absolute top-0 right-1/2 translate-x-1/2 -translate-y-1/2 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">الأكثر
+                        طلباً</span>
+                    <h3 class="text-xl font-bold text-secondary dark:text-white">Professional</h3>
+                    <div class="text-3xl font-black text-primary my-4">199 <span
+                            class="text-sm text-gray-400 font-medium">جنيه / شهر</span></div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3 text-sm font-bold text-secondary dark:text-white"><span
+                                class="material-symbols-outlined text-primary">check_circle</span> كل مميزات Starter
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-300"><span
+                                class="material-symbols-outlined text-green-500">check</span> تاسكات أقرب لمشاريع حقيقية
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-300"><span
+                                class="material-symbols-outlined text-green-500">check</span> Feedback تفصيلي</li>
+                        <li class="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-300"><span
+                                class="material-symbols-outlined text-green-500">check</span> أولوية في التقييم والترقية
+                        </li>
+                    </ul>
+                    <button onclick="selectPackage('professional')"
+                        class="w-full py-3 rounded-xl bg-primary text-white font-bold hover:bg-primary-dark transition-all">اختر
+                        الباقة</button>
+                </div>
+                <!-- Pro -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-200 dark:border-gray-700">
+                    <h3 class="text-xl font-bold text-secondary dark:text-white">Pro</h3>
+                    <div class="text-3xl font-black text-primary my-4">349 <span
+                            class="text-sm text-gray-400 font-medium">جنيه / شهر</span></div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3 text-sm font-bold text-secondary dark:text-white"><span
+                                class="material-symbols-outlined text-primary">check_circle</span> كل مميزات الباقات
+                            السابقة</li>
+                        <li class="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-300"><span
+                                class="material-symbols-outlined text-green-500">check</span> مشاركة في مشاريع قائمة
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-300"><span
+                                class="material-symbols-outlined text-green-500">check</span> أولوية للتاسكات المدفوعة
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-300"><span
+                                class="material-symbols-outlined text-green-500">check</span> تقييم احترافي للأداء</li>
+                    </ul>
+                    <button onclick="selectPackage('pro')"
+                        class="w-full py-3 rounded-xl border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-300 font-bold hover:border-secondary hover:text-secondary dark:hover:border-white dark:hover:text-white transition-all">اختر
+                        الباقة</button>
+                </div>
+            </div>
+            <p class="text-center text-xs text-red-500 mt-6 font-bold">* الاشتراك لا يعني القبول التلقائي، القبول بيتم
+                بعد مراجعة مستواك.</p>
+        </div>
+    </section>
+
+    <!-- Application Form -->
+    <section id="apply" class="py-20 bg-white dark:bg-background-dark transition-colors duration-300">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div
+                class="bg-gray-50 dark:bg-gray-800/50 p-8 md:p-12 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-lg">
+                <div class="text-center mb-10">
+                    <h2 class="text-2xl font-black text-secondary dark:text-white mb-2">طلب انضمام للتدريب</h2>
+                    <p class="text-gray-500 dark:text-gray-400">املأ البيانات بدقة، دي أول خطوة في تقديمك الشغل</p>
+                </div>
+
+                <form id="trainingForm" class="space-y-8">
+                    <!-- Row 1: Personal Info -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label for="fullName" class="block text-sm font-bold text-gray-700 dark:text-gray-300">الاسم
+                                بالكامل</label>
+                            <input type="text" id="fullName" required
+                                class="w-full px-4 py-3 rounded-xl border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-primary focus:border-primary dark:text-white transition-all shadow-sm"
+                                placeholder="اسمك ثلاثي">
+                        </div>
+                        <div class="space-y-2">
+                            <label for="mobile" class="block text-sm font-bold text-gray-700 dark:text-gray-300">رقم
+                                الهاتف (للتواصل واتساب)</label>
+                            <input type="tel" id="mobile" required
+                                class="w-full px-4 py-3 rounded-xl border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-primary focus:border-primary dark:text-white transition-all shadow-sm"
+                                placeholder="01xxxxxxxxx">
+                        </div>
+                    </div>
+
+                    <!-- Row 2: Track Selection -->
+                    <div class="space-y-4">
+                        <label class="block text-sm font-bold text-gray-700 dark:text-gray-300">التراك (التخصص)</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                            <!-- Web Development -->
+                            <label class="path-card cursor-pointer group relative">
+                                <input type="radio" name="track" value="Web Development" class="peer hidden" required>
+                                <div
+                                    class="p-4 h-full border-2 border-gray-100 dark:border-gray-700 rounded-2xl bg-white dark:bg-gray-800 hover:border-primary/50 dark:hover:border-primary/50 transition-all duration-300 flex flex-col items-center justify-center text-center gap-3 peer-checked:border-primary peer-checked:bg-primary/5">
+                                    <div
+                                        class="size-12 rounded-xl bg-blue-50 dark:bg-blue-900/20 text-blue-500 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                        <span class="material-symbols-outlined text-2xl">code</span>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-secondary dark:text-white text-sm">Web Development
+                                        </h3>
+                                        <p class="text-[10px] text-gray-400 mt-1">تطوير الويب</p>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <!-- Freelancing -->
+                            <label class="path-card cursor-pointer group relative">
+                                <input type="radio" name="track" value="Freelancing" class="peer hidden">
+                                <div
+                                    class="p-4 h-full border-2 border-gray-100 dark:border-gray-700 rounded-2xl bg-white dark:bg-gray-800 hover:border-primary/50 dark:hover:border-primary/50 transition-all duration-300 flex flex-col items-center justify-center text-center gap-3 peer-checked:border-primary peer-checked:bg-primary/5">
+                                    <div
+                                        class="size-12 rounded-xl bg-amber-50 dark:bg-amber-900/20 text-amber-500 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                        <span class="material-symbols-outlined text-2xl">work_history</span>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-secondary dark:text-white text-sm">Freelancing</h3>
+                                        <p class="text-[10px] text-gray-400 mt-1">العمل الحر</p>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <!-- Microsoft Office -->
+                            <label class="path-card cursor-pointer group relative">
+                                <input type="radio" name="track" value="Microsoft Office" class="peer hidden">
+                                <div
+                                    class="p-4 h-full border-2 border-gray-100 dark:border-gray-700 rounded-2xl bg-white dark:bg-gray-800 hover:border-primary/50 dark:hover:border-primary/50 transition-all duration-300 flex flex-col items-center justify-center text-center gap-3 peer-checked:border-primary peer-checked:bg-primary/5">
+                                    <div
+                                        class="size-12 rounded-xl bg-teal-50 dark:bg-teal-900/20 text-teal-500 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                        <span class="material-symbols-outlined text-2xl">description</span>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-secondary dark:text-white text-sm">Microsoft Office
+                                        </h3>
+                                        <p class="text-[10px] text-gray-400 mt-1">برامج مكتبية</p>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <!-- Disabled Items -->
+                            <div class="relative opacity-60 grayscale cursor-not-allowed">
+                                <div
+                                    class="h-full border border-gray-100 dark:border-gray-800 rounded-2xl bg-gray-50 dark:bg-gray-900 flex flex-col items-center justify-center p-4 gap-3">
+                                    <span
+                                        class="absolute top-3 left-3 bg-gray-200 dark:bg-gray-800 text-[10px] px-2 py-1 rounded-full font-bold">قريباً</span>
+                                    <div
+                                        class="size-12 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-400 flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-2xl">campaign</span>
+                                    </div>
+                                    <div class="text-center">
+                                        <h3 class="font-bold text-gray-400 text-sm">Digital Marketing</h3>
+                                        <p class="text-[10px] text-gray-400 mt-1">تسويق رقمي</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="relative opacity-60 grayscale cursor-not-allowed hidden md:block">
+                                <div
+                                    class="h-full border border-gray-100 dark:border-gray-800 rounded-2xl bg-gray-50 dark:bg-gray-900 flex flex-col items-center justify-center p-4 gap-3">
+                                    <span
+                                        class="absolute top-3 left-3 bg-gray-200 dark:bg-gray-800 text-[10px] px-2 py-1 rounded-full font-bold">قريباً</span>
+                                    <div
+                                        class="size-12 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-400 flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-2xl">video_library</span>
+                                    </div>
+                                    <div class="text-center">
+                                        <h3 class="font-bold text-gray-400 text-sm">Content Creation</h3>
+                                        <p class="text-[10px] text-gray-400 mt-1">صناعة محتوى</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 3: Level & Package -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Level -->
+                        <div class="space-y-4">
+                            <label class="block text-sm font-bold text-gray-700 dark:text-gray-300">المستوى
+                                الحالي</label>
+                            <div class="space-y-3">
+                                <label class="cursor-pointer group block">
+                                    <input type="radio" name="level" value="Beginner" class="peer hidden" required>
+                                    <div
+                                        class="flex items-center gap-4 p-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-primary/30 transition-all peer-checked:border-primary peer-checked:bg-primary/5">
+                                        <div
+                                            class="size-10 rounded-lg bg-green-50 dark:bg-green-900/20 text-green-600 flex items-center justify-center">
+                                            <span class="material-symbols-outlined">star_rate</span>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-bold text-sm text-secondary dark:text-white">مبتدئ</h3>
+                                            <p class="text-[10px] text-gray-400">عارف الأساسيات</p>
+                                        </div>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer group block">
+                                    <input type="radio" name="level" value="Intermediate" class="peer hidden">
+                                    <div
+                                        class="flex items-center gap-4 p-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-primary/30 transition-all peer-checked:border-primary peer-checked:bg-primary/5">
+                                        <div
+                                            class="size-10 rounded-lg bg-yellow-50 dark:bg-yellow-900/20 text-yellow-600 flex items-center justify-center">
+                                            <span class="material-symbols-outlined">star_half</span>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-bold text-sm text-secondary dark:text-white">متوسط</h3>
+                                            <p class="text-[10px] text-gray-400">عملت مشاريع بسيطة</p>
+                                        </div>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer group block">
+                                    <input type="radio" name="level" value="Advanced" class="peer hidden">
+                                    <div
+                                        class="flex items-center gap-4 p-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-primary/30 transition-all peer-checked:border-primary peer-checked:bg-primary/5">
+                                        <div
+                                            class="size-10 rounded-lg bg-purple-50 dark:bg-purple-900/20 text-purple-600 flex items-center justify-center">
+                                            <span class="material-symbols-outlined">stars</span>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-bold text-sm text-secondary dark:text-white">متقدم</h3>
+                                            <p class="text-[10px] text-gray-400">جاهز للشغل</p>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Package -->
+                        <div class="space-y-4">
+                            <label class="block text-sm font-bold text-gray-700 dark:text-gray-300">الباقة
+                                المختارة</label>
+                            <div class="space-y-3">
+                                <label class="cursor-pointer group block">
+                                    <input type="radio" name="package" value="Starter" class="peer hidden" required>
+                                    <div
+                                        class="flex items-center justify-between p-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-primary/30 transition-all peer-checked:border-primary peer-checked:bg-primary/5">
+                                        <div class="flex items-center gap-4">
+                                            <div
+                                                class="size-10 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-500 flex items-center justify-center">
+                                                <span class="material-symbols-outlined">school</span>
+                                            </div>
+                                            <div>
+                                                <h3 class="font-bold text-sm text-secondary dark:text-white">Starter
+                                                </h3>
+                                                <p class="text-[10px] text-gray-400">99 ج.م / شهر</p>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="size-5 rounded-full border-2 border-gray-300 peer-checked:border-primary peer-checked:bg-primary">
+                                        </div>
+                                    </div>
+                                </label>
+
+                                <label class="cursor-pointer group block">
+                                    <input type="radio" name="package" value="Professional" class="peer hidden">
+                                    <div
+                                        class="flex items-center justify-between p-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-primary/30 transition-all peer-checked:border-primary peer-checked:bg-primary/5">
+                                        <div class="flex items-center gap-4">
+                                            <div
+                                                class="size-10 rounded-lg bg-primary/20 text-primary flex items-center justify-center">
+                                                <span class="material-symbols-outlined">workspace_premium</span>
+                                            </div>
+                                            <div>
+                                                <h3 class="font-bold text-sm text-secondary dark:text-white">
+                                                    Professional</h3>
+                                                <p class="text-[10px] text-gray-500">199 ج.م / شهر</p>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="size-5 rounded-full border-2 border-gray-300 peer-checked:border-primary peer-checked:bg-primary">
+                                        </div>
+                                    </div>
+                                </label>
+
+                                <label class="cursor-pointer group block">
+                                    <input type="radio" name="package" value="Pro" class="peer hidden">
+                                    <div
+                                        class="flex items-center justify-between p-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-primary/30 transition-all peer-checked:border-primary peer-checked:bg-primary/5">
+                                        <div class="flex items-center gap-4">
+                                            <div
+                                                class="size-10 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-500 flex items-center justify-center">
+                                                <span class="material-symbols-outlined">diamond</span>
+                                            </div>
+                                            <div>
+                                                <h3 class="font-bold text-sm text-secondary dark:text-white">Pro</h3>
+                                                <p class="text-[10px] text-gray-400">349 ج.م / شهر</p>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="size-5 rounded-full border-2 border-gray-300 peer-checked:border-primary peer-checked:bg-primary">
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 4: Links -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label for="githubLink"
+                                class="block text-sm font-bold text-gray-700 dark:text-gray-300">رابط GitHub / Portfolio
+                                <span class="text-xs font-normal text-gray-400">(اختياري)</span></label>
+                            <input type="url" id="githubLink"
+                                class="w-full px-4 py-3 rounded-xl border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-primary focus:border-primary dark:text-white transition-all shadow-sm"
+                                placeholder="https://github.com/username">
+                        </div>
+                        <div class="space-y-2">
+                            <label for="cvLink" class="block text-sm font-bold text-gray-700 dark:text-gray-300">رابط CV
+                                <span class="text-xs font-normal text-gray-400">(اختياري)</span></label>
+                            <input type="url" id="cvLink"
+                                class="w-full px-4 py-3 rounded-xl border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-primary focus:border-primary dark:text-white transition-all shadow-sm"
+                                placeholder="Google Drive / Dropbox Link">
+                        </div>
+                    </div>
+
+                    <!-- Row 5: Reason -->
+                    <div class="space-y-2">
+                        <label for="reason" class="block text-sm font-bold text-gray-700 dark:text-gray-300">ليه عايز
+                            تنضم للتدريب؟</label>
+                        <textarea id="reason" required rows="4"
+                            class="w-full px-4 py-3 rounded-xl border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-primary focus:border-primary dark:text-white transition-all shadow-sm placeholder-gray-400"
+                            placeholder="اشرح لنا هدفك وايه اللي متوقعه من التدريب..."></textarea>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" id="submitBtn"
+                        class="w-full bg-primary hover:bg-primary-dark text-white font-bold py-4 rounded-xl shadow-lg shadow-primary/25 transition-all transform active:scale-[0.98] text-lg flex items-center justify-center gap-2">
+                        <span>إرسال الطلب</span>
+                        <span class="material-symbols-outlined">send</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-secondary text-gray-300 py-10 border-t border-gray-800 dark:bg-black/60 text-center">
+        <p>© 2026 بوصلة. جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <!-- Appwrite SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/appwrite@16.1.0"></script>
+    <script src="../assets/js/appwrite.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        // Package Selection Logic
+        function selectPackage(pkg) {
+            const displayNames = {
+                'starter': 'Starter',
+                'professional': 'Professional',
+                'pro': 'Pro'
+            };
+            document.getElementById('selectedPackage').value = displayNames[pkg];
+            document.getElementById('apply').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Form Submission Logic
+        document.getElementById('trainingForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<span class="animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full"></span> جاري الإرسال...';
+            btn.disabled = true;
+
+            const { databases, DATABASE_ID, COLLECTIONS, ID } = window.appwrite;
+
+            const mobileNumber = document.getElementById('mobile').value;
+            const formData = {
+                fullName: document.getElementById('fullName').value,
+                email: `${mobileNumber}@private.user`, // Fake email to bypass backend requirement
+                mobile: mobileNumber,
+                track: document.querySelector('input[name="track"]:checked')?.value || '',
+                level: document.querySelector('input[name="level"]:checked')?.value || '',
+                package: document.querySelector('input[name="package"]:checked')?.value || '',
+                githubLink: document.getElementById('githubLink').value,
+                cvLink: document.getElementById('cvLink').value,
+                reason: document.getElementById('reason').value,
+                status: 'Pending',
+                appliedAt: new Date().toISOString()
+            };
+
+            // حذف الحقول الاختيارية الفارغة لتجنب مشاكل التحقق (URL format validation)
+            if (!formData.githubLink || formData.githubLink.trim() === '') {
+                // تعيين رابط افتراضي لأن الحقل قد يكون مطلوباً في قاعدة البيانات
+                formData.githubLink = 'https://github.com/none';
+            }
+            if (!formData.cvLink || formData.cvLink.trim() === '') {
+                delete formData.cvLink;
+            }
+
+            try {
+                // Using TRAINEES collection which we added to appwrite.js
+                await databases.createDocument(
+                    DATABASE_ID,
+                    COLLECTIONS.TRAINEES,
+                    ID.unique(),
+                    formData
+                );
+
+                Swal.fire({
+                    title: 'تم استلام طلبك بنجاح!',
+                    text: 'سيتم مراجعة طلبك والتواصل معك قريباً في حالة القبول.',
+                    icon: 'success',
+                    confirmButtonText: 'ممتاز',
+                    confirmButtonColor: '#13b6ec'
+                });
+
+                document.getElementById('trainingForm').reset();
+            } catch (error) {
+                console.error('Submission Error:', error);
+                Swal.fire({
+                    title: 'حدث خطأ!',
+                    text: 'لم نتمكن من إرسال الطلب، يرجى المحاولة مرة أخرى.',
+                    icon: 'error',
+                    confirmButtonText: 'حسناً'
+                });
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+
+</html>

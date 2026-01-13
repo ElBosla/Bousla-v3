@@ -1,0 +1,19 @@
+{
+  "name": "bousla-appwrite-setup",
+  "version": "1.0.0",
+  "description": "Appwrite database setup script for Bousla project",
+  "main": "setup-appwrite.js",
+  "scripts": {
+    "setup": "node setup-appwrite.js"
+  },
+  "keywords": [
+    "appwrite",
+    "database",
+    "setup"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-appwrite": "^13.0.0"
+  }
+}
